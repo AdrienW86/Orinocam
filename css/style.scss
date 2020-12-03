@@ -1,0 +1,89 @@
+header {
+    height: 50px;
+    background-color: rgb(37, 37, 37);
+    margin: 0px; 
+    align-content: space-around;
+}
+
+body {
+    background-color: rgb(37, 37, 37);
+}
+
+.intro {
+    background-color: rgb(206, 206, 206);
+    margin-top: 0px;
+    background-image: url("/images/vintage.jpg");  
+    background-size: 100%;
+    height: 400px;
+    width: 100%;
+    position: relative;
+    bottom: 40px;
+
+       h1 { 
+        
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5em;
+    position: relative; 
+    left:1050px;
+    top: 300px;
+    text-align: left;
+    color: whitesmoke;
+    padding-top: 20px;
+    padding-right: 35px;
+    display: flex;
+}
+}
+
+
+.box_of_picture {
+    width: 350px;
+    height:200px;
+}
+
+.icone_appareil_photo {
+    font-size: 2rem;
+    
+    margin: 15px;
+}
+
+.panier {
+    font-size:1em;
+    color: whitesmoke
+}   
+a {
+    text-decoration: none; 
+    font-family: 'Dancing Script', cursive;
+    font-size: 1em;  
+    color: whitesmoke; 
+}
+
+.icone_contact {
+    font-size: 1em;
+    color: whitesmoke;
+   
+}
+
+ul {
+    font-size: 3em;
+    display: flex;
+    list-style: none;
+    align-content: space-around;
+}
+
+li {
+   
+    display:flex;
+    width: 25%;
+    margin-left : 10%;
+
+ 
+    &:hover {
+      text-decoration: underline;
+    }
+}
+
+.icone_contact:hover, .panier:hover {
+   color: red;
+}
+
+

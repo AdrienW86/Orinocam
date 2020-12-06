@@ -8,7 +8,6 @@
         <title> Orinocam </title>
     </head>
 <body>
-
     <header>
         <div class="en-tete">           
             <nav class="navbar">
@@ -33,51 +32,21 @@
      <div class="banniere"></div>
 
 
-
-    <main class="basket flex-block">
-		<div id="basket-resume">
-			<p id="panierVide">Votre panier est vide</p>
+    <section class="order-confirm__card">
+		<div class="order-confirm__card__resume">
+			<i class="fas fa-check"></i>
+			<h2 class="order-confirm__card__resume__congrat">Merci pour votre achat <span id="lastName"></span> !</h2>
+			<div class="order-confirm__card__resume__info">
+				<p>numéro de commande : <span id="orderId"></span></p>
+			</div>
 		</div>
-		<div class="form">
-			<form method="post" name="form-panier">
-				<fieldset>
-					<legend>Civilité</legend>
-					<div class="form__group">
-						<div class="form__group">
-							<label for="formNom">Nom : </label>
-							<input type="text" id="formNom" class="form-control input-control" required name="formNom">
-						</div>
-						<div class="form__group">
-							<label for="formPrenom" class="right-inline">Prénom :</label>
-							<input type="text" id="formPrenom" class="form-control input-control" required name="formPrenom">
-						</div>
-					</div>
-				</fieldset> 
-				<fieldset>
-					<legend>Coordonnées</legend>
-					<div class="form__group">
-						<label for="formMail">E-mail :</label>
-						<input type="email" id="formMail" class="form-control input-control" required name="formMail">
-					</div>
-					<div class="form__group">
-						<label for="formAdresse">Adresse :</label>
-						<input type="text" id="formAdresse" class="form-control input-control" required name="formAdresse">
-					</div>
-					<div class="form__group">
-						<label for="formVille">Ville :</label>
-						<input type="text" id="formVille" class="form-control input-control" required name="formVille">
-					</div>
-				</fieldset> 
-				<input type="button" value="Je valide mon panier et mes informations" class="btn btn--form" id="envoiPost">
-			</form>
-		</div>
-    </main>
+		<nav class="order-confirm__card__nav">
+			<p>Pour revenir à l'accueil de notre boutique cliquez sur ce lien <a href="index.html">Accueil</a></p>
+		</nav>
+    </section>
     
     <script src="index.js"></script>
-	<script>
-		addition();
-		validForm()
-	</script>
-    
+    <script>resultOrder()</script>
+        
 </body>
 </html>

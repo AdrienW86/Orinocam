@@ -1,0 +1,53 @@
+header {
+    height: 150px;
+    background-color: $black;
+    margin: 0px; 
+    align-content: space-around;
+}
+
+.panier {
+    font-size:1em;
+    color: $white
+}  
+
+.lien_nav {
+    text-decoration: none; 
+    font-family: 'Dancing Script', cursive;
+    font-size: 1em;    
+    color: white;
+}
+
+.icone_contact {
+    font-size: 1em;
+    color: $white;
+}
+
+ul {
+    font-size: 3em;
+    display: flex;
+    list-style: none;
+    align-content: space-around;
+}
+
+a {
+    color: $white;
+    text-decoration: none
+
+}
+li {   
+    display:flex;
+    width: 25%;
+    margin-left : 10%;
+    color: $white;
+    text-decoration: none;
+    
+    &:hover {
+        span {
+            border-bottom: 2px solid $gold;
+        }
+    }
+}
+
+.icone_contact:hover, .panier:hover {
+    color: $gold;
+}

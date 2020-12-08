@@ -73,6 +73,10 @@ header {
   color: whitesmoke;
 }
 
+.lien_panier {
+  color: #6e5e14;
+}
+
 .lien_nav {
   text-decoration: none;
   font-family: 'Dancing Script', cursive;
@@ -110,7 +114,12 @@ li {
   text-decoration: none;
 }
 
-li:hover span {
+span#indexPanier {
+  color: #6e5e14;
+  font-size: 1.2em;
+}
+
+.accueil:hover {
   border-bottom: 2px solid #6e5e14;
 }
 
@@ -298,6 +307,11 @@ select {
 
 fieldset {
   padding-left: 10%;
+}
+
+.btn-delete {
+  height: 30px;
+  width: 60px;
 }
 
 .btn_form {

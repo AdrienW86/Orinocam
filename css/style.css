@@ -1,22 +1,67 @@
 h1 {
-  font-family: 'Dancing Script', cursive;
-  position: relative;
-  left: 1050px;
-  bottom: 210px;
-  text-align: left;
+  z-index: +10;
   color: whitesmoke;
-  padding-top: 20px;
-  padding-right: 35px;
+  font-family: 'Dancing Script', cursive;
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
+@media only screen and (max-width: 760px) {
+  h1 {
+    display: none;
+    right: 20px;
+    top: 120px;
+    font-size: 1em;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  h1 {
+    right: 20px;
+    top: 330px;
+    font-size: 1.7em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  h1 {
+    left: 60%;
+    top: 370px;
+  }
+}
+
 h2 {
+  font-family: 'Dancing Script', cursive;
   text-decoration: underline;
   font-weight: bold;
   position: relative;
-  bottom: 140px;
+  text-align: center;
+  color: #6e5e14;
+}
+
+@media only screen and (max-width: 760px) {
+  h2 {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  h2 {
+    font-size: 1.7em;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  h2 {
+    font-size: 2.5em;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
 }
 
 h3 {
@@ -26,16 +71,66 @@ h3 {
   padding-left: 30px;
 }
 
+@media only screen and (max-width: 760px) {
+  h3 {
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  h3 {
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  h3 {
+    font-size: 2em;
+  }
+}
+
 h4 {
   font-family: 'Dancing Script', cursive;
   font-size: 2em;
   text-align: left;
   color: #6e5e14;
+  padding-left: 10px;
 }
 
-.icone_appareil_photo {
-  font-size: 2rem;
-  margin: 15px;
+@media only screen and (max-width: 760px) {
+  h4 {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .icone_appareil_photo {
+    font-size: 1rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    top: 7px;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  .icone_appareil_photo {
+    font-size: 1.7rem;
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+    top: 7px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .icone_appareil_photo {
+    font-size: 2.5rem;
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+    top: 7px;
+  }
 }
 
 button {
@@ -47,9 +142,27 @@ button {
   width: 120px;
 }
 
+@media only screen and (max-width: 760px) {
+  button {
+    position: relative;
+    top: 25px;
+    width: 60px;
+    margin: 0px;
+    font-size: 0.7em;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
 button a {
   text-decoration: none;
   color: whitesmoke;
+}
+
+@media only screen and (max-width: 760px) {
+  button a {
+    font-size: 0.9em;
+  }
 }
 
 button a:hover {
@@ -60,12 +173,30 @@ button button:active {
   color: #6e5e14;
 }
 
-header {
-  height: 150px;
-  background-color: #252525;
-  margin: 0px;
-  -ms-flex-line-pack: distribute;
-      align-content: space-around;
+.banniere {
+  background-image: url("/images/vintage.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  z-index: +10;
+}
+
+@media only screen and (max-width: 760px) {
+  .banniere {
+    height: 80px;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  .banniere {
+    height: 230px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .banniere {
+    height: 290px;
+  }
 }
 
 .panier {
@@ -81,7 +212,7 @@ header {
   text-decoration: none;
   font-family: 'Dancing Script', cursive;
   font-size: 1em;
-  color: white;
+  color: whitesmoke;
 }
 
 .icone_contact {
@@ -90,13 +221,32 @@ header {
 }
 
 ul {
-  font-size: 3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   list-style: none;
   -ms-flex-line-pack: distribute;
       align-content: space-around;
+}
+
+@media only screen and (max-width: 760px) {
+  ul {
+    font-size: 1em;
+    margin: auto;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  ul {
+    font-size: 3em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  ul {
+    font-size: 3em;
+  }
 }
 
 a {
@@ -110,13 +260,19 @@ li {
   display: flex;
   width: 25%;
   margin-left: 10%;
-  color: whitesmoke;
+  color: #6e5e14;
   text-decoration: none;
 }
 
-span#indexPanier {
-  color: #6e5e14;
-  font-size: 1.2em;
+@media only screen and (max-width: 760px) {
+  li {
+    width: 33%;
+    margin: 0px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-right: 18%;
+  }
 }
 
 .accueil:hover {
@@ -127,35 +283,123 @@ span#indexPanier {
   color: #6e5e14;
 }
 
+#indexPanier {
+  color: #6e5e14;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+@media only screen and (max-width: 760px) {
+  #indexPanier {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  #indexPanier {
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #indexPanier {
+    font-size: 1.2em;
+  }
+}
+
 body {
   background-color: #252525;
-}
-
-.banniere {
-  margin-top: 0px;
-  background-image: url("/images/vintage.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
   width: 100%;
-  height: 460px;
-  position: relative;
-  bottom: 40px;
+  margin: 0px;
 }
 
-.box_of_picture {
-  width: 350px;
-  height: 200px;
+.container {
+  width: 100%;
+  margin: 0px;
+  overflow: hidden;
 }
 
-.intro {
-  font-size: 2em;
-  font-family: 'Dancing Script', cursive;
-  color: #6e5e14;
-  text-align: center;
-  height: 100px;
+@media only screen and (max-width: 760px) {
+  img {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+  }
 }
 
-.list-product {
+@media only screen and (max-width: 760px) {
+  .liste-product {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 265px;
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .box_photo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 50%;
+    height: 100px;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  .box_photo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 265px;
+    width: 400px;
+    overflow: hidden;
+    padding: 20px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .box_photo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 265px;
+    width: 400px;
+    overflow: hidden;
+    padding: 20px;
+  }
+}
+
+.appareil_box {
+  background-color: #252525;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 2px whitesmoke solid;
+  width: 100%;
+}
+
+@media only screen and (max-width: 760px) {
+  .appareil_box {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: flex wrap;
+            flex-flow: flex wrap;
+    width: 100%;
+  }
+}
+
+.appareil_box--bloc_description {
+  background-color: #252525;
+  text-align: right;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -165,29 +409,31 @@ body {
           flex-direction: column;
 }
 
-.list-product__block {
-  background-color: #252525;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border: 2px whitesmoke solid;
+@media only screen and (max-width: 760px) {
+  .appareil_box--bloc_description {
+    width: 50%;
+    font-size: 0.7em;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 
-.list-product__block--left {
-  padding-right: 10px;
-}
-
-.list-product__block--right {
-  background-color: #252525;
-  text-align: right;
-  width: 100%;
-}
-
-p {
+.prix {
   color: whitesmoke;
   font-size: 2em;
   padding-left: 20px;
   padding-top: 50px;
+}
+
+@media only screen and (max-width: 760px) {
+  .prix {
+    font-size: 0.7em;
+    padding: 0px;
+    position: relative;
+    top: 10px;
+    left: 30px;
+  }
 }
 
 .description_produit {
@@ -196,8 +442,32 @@ p {
   text-align: left;
 }
 
+@media only screen and (max-width: 760px) {
+  .description_produit {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  .description_produit {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
 .produit_last_box {
   width: 300px;
+}
+
+@media only screen and (max-width: 760px) {
+  .produit_last_box {
+    font-size: 0.8em;
+    width: 30%;
+  }
 }
 
 .box_produit {
@@ -315,7 +585,7 @@ fieldset {
 }
 
 .btn_form {
-  color: red;
+  color: #6e5e14;
 }
 
 .remerciements_achats {

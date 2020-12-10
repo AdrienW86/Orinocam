@@ -3,7 +3,7 @@
 $gold : rgb(110, 94, 20);
 $black: rgb(37, 37, 37);
 $white: rgb(245, 245, 245);
-$Grey : rgb(206, 206 ,206);
+
 
 $phone:"only screen and (max-width:760px)";
 $medium:"only screen and (min-width:760px) and(max-width: 1200px)";
@@ -11,23 +11,56 @@ $large:"only screen and (min-width: 1200px)";
 
 // Titres & Fonts
 
-h1 {       
-    font-family: 'Dancing Script', cursive;
-    position: relative; 
-    left:1050px;
-    bottom: 210px;
-    text-align: left;
+h1 {    
+    z-index: +10;
     color: $white;
-    padding-top: 20px;
-    padding-right: 35px;
+    font-family: 'Dancing Script', cursive;
+    position: absolute;
     display: flex;
-}
+   
+    @media #{$phone} {  
+        display: none;
+        right:20px;
+        top: 120px;
+        font-size: 1em;            
+    }
+
+    @media #{$medium} {  
+        right:20px;
+        top: 330px;
+        font-size: 1.7em;
+    }
+
+    @media #{$large} {
+        left: 60%;
+        top: 370px;
+    }
+}    
 
 h2 {
+    font-family: 'Dancing Script', cursive;
     text-decoration: underline;
     font-weight: bold;
     position: relative;
-    bottom: 140px;
+    text-align: center;
+    color: $gold;    
+    
+    @media #{$phone} {        
+        font-size: 1em;
+        margin-bottom: 10px;        
+    }
+
+    @media #{$medium} {         
+        font-size: 1.7em;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    @media #{$large} {
+        font-size: 2.5em;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
 }
 
 h3 {
@@ -35,6 +68,18 @@ h3 {
     color: $white;
     font-size: 2em;
     padding-left: 30px;
+
+    @media #{$phone} {        
+        font-size: 0.7em;        
+    }
+
+    @media #{$medium} {         
+        font-size: 1.2em;
+    }
+
+    @media #{$large} {
+        font-size: 2em;
+    }
 }
 
 h4 {
@@ -42,11 +87,38 @@ h4 {
     font-size: 2em;
     text-align: left;
     color: $gold;
+    padding-left: 10px;
+
+    @media #{$phone} {
+        font-size: 1em;       
+    }
 }
 
 .icone_appareil_photo {
-    font-size: 2rem;   
-    margin: 15px;
+
+    @media #{$phone} {
+        font-size: 1rem; 
+        margin-left: 5px;
+        margin-right: 5px;  
+        position: relative;
+        top: 7px;
+    }
+
+    @media #{$medium} {
+        font-size: 1.7rem; 
+        margin-left: 15px;
+        margin-right: 15px;  
+        position: relative;
+        top: 7px;
+    }
+
+    @media #{$large} {
+        font-size: 2.5rem; 
+        margin-left: 15px;
+        margin-right: 15px;  
+        position: relative;
+        top: 7px;
+    }
 }
 
 // Composants
@@ -58,44 +130,73 @@ button {
     margin-right: 40px;
     vertical-align: center;
     width: 120px;
+
+    @media #{$phone} {
+        position: relative;
+        top: 25px;
+        width: 60px;   
+        margin: 0px;
+        font-size: 0.7em;
+        margin-left: 5px;
+        margin-right: 5px;      
+    }
      
     a {
         text-decoration: none;
         color: $white;
 
+        @media #{$phone} {
+            font-size: 0.9em      
+        }
+
         &:hover {
             color: darken($color: #000000, $amount: 10)
         }  
     }
+
     button:active {
         color: $gold;
     }
 }
 
+
+
 // Header
 
-header {
-    height: 150px;
-    background-color:$black;
-    margin: 0px; 
-    align-content: space-around;
-}
+.banniere {
+    background-image: url("/images/vintage.jpg");  
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    z-index: +10;
 
+    @media #{$phone} {
+        height: 80px;
+    }
+
+    @media #{$medium} {
+        height: 230px;
+    }
+   
+    @media #{$large} {
+    height: 290px;
+    }
+}
+ 
 .panier {
     font-size:1em;
     color: $white
 }  
 
 .lien_panier {
-    color:$gold;
-   
+    color:$gold;  
 }
 
 .lien_nav {
     text-decoration: none; 
     font-family: 'Dancing Script', cursive;
     font-size: 1em;    
-    color: white;
+    color: $white;
 }
 
 .icone_contact {
@@ -103,31 +204,45 @@ header {
     color: $white;
 }
 
-ul {
-    font-size: 3em;
+ul {   
     display: flex;
     list-style: none;
     align-content: space-around;
+
+    @media #{$phone} {
+        font-size: 1em;
+        margin: auto;
+        width: 100%;
+    }
+    @media #{$medium} {
+        font-size: 3em;
+    }
+   
+    @media #{$large} {
+        font-size: 3em;
+    }
 }
 
 a {
     color: $white;
-    text-decoration: none
-
+    text-decoration: none;
 }
+
 li {   
     display:flex;
     width: 25%;
     margin-left : 10%;
-    color: $white;
-    text-decoration: none;   
-}
-
-span#indexPanier {
     color: $gold;
-    font-size: 1.2em;
+    text-decoration: none;   
+
+    @media #{$phone} {
+       width: 33%;
+       margin: 0px;
+       justify-content: center;
+       padding-right: 18%;
+    }
 }
-       
+      
 .accueil:hover {
     border-bottom: 2px solid $gold;
 }
@@ -136,74 +251,151 @@ span#indexPanier {
     color: $gold;
 }
 
+#indexPanier {
+    color: $gold;   
+    font-family: 'Courier New', Courier, monospace;
+
+    @media #{$phone} {
+        font-size: 1em;
+    }
+
+    @media #{$medium} {
+        font-size: 1.2em;
+    }
+   
+    @media #{$large} {
+        font-size: 1.2em;
+    }
+}
+
 // Menu
 
 body {
     background-color: $black;
-}
-
-.banniere {
-    
-    margin-top: 0px;
-    background-image: url("/images/vintage.jpg");  
-    background-size: 100%;
-    background-repeat: no-repeat;
     width: 100%;
-    height: 460px;
-    position: relative;
-    bottom: 40px;
-}
- 
-.box_of_picture {
-    width: 350px;
-    height:200px;
+    margin: 0px; 
 }
 
-.intro {
-    font-size: 2em;
-    font-family: 'Dancing Script', cursive;
-    color: $gold;
-    text-align: center;
-    height: 100px;
+ .container {
+     width: 100%;
+     margin: 0px;
+     overflow: hidden;
 }
 
-.list-product {  
-    display: flex;
-    flex-direction: column;   
+img {
+    @media #{$phone} {
+        width: 100%;
+        height:100%;
+        margin: 0px;
+    }
 }
-.list-product__block {
+
+.liste-product {
+    @media #{$phone} {
+        display: flex; 
+        height: 265px;  
+        width: 90%;
+    }
+}
+
+.box_photo {
+  
+    @media #{$phone} {
+        display: flex;   
+        width: 50%; 
+        height: 100px;             
+    }
+    
+    @media #{$medium} {
+        display: flex;
+        flex-direction: column; 
+        height: 265px;  
+        width: 400px;
+        overflow: hidden;
+        padding: 20px;
+    }
+   
+    @media #{$large} {
+        display: flex;
+        flex-direction: column; 
+        height: 265px;  
+        width: 400px;
+        overflow: hidden;
+        padding: 20px;
+    }
+}
+
+.appareil_box {
     background-color:$black;
     display: flex;
-    border: 2px $white solid;
-}
-.list-product__block--left {
-    padding-right: 10px;
-}
-.list-product__block--right {
+    border: 2px $white solid; 
+    width: 100%; 
+
+    @media #{$phone} {
+        flex-flow: flex wrap; 
+        width: 100%;              
+    }
+}   
+   
+.appareil_box--bloc_description {
     background-color: $black;
     text-align: right;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+      
+
+    @media #{$phone} {
+        width: 50%;
+        font-size: 0.7em;
+        text-align: center;
+        margin-left: 5px;
+       margin-right: 5px;           
+    }  
 }
-p {
+
+.prix {
     color : $white;
     font-size: 2em;
     padding-left:20px;
-    padding-top: 50px;
+    padding-top: 50px;  
+
+    @media #{$phone} {
+        font-size: 0.7em;
+        padding: 0px; 
+        position: relative;
+        top: 10px;
+        left: 30px;           
+    }
 }
 
 .description_produit {
     color : $white;
     font-size: 1.2em;
     text-align: left;
+   
+
+    @media #{$phone} {
+        display: flex;
+        width: 100%;  
+        font-size: 0.7em;                      
+    }
+
+    @media #{$medium} {
+       padding-left: 15px;
+       padding-right: 15px;                     
+    }
 }
 
 .produit_last_box {
-    width: 300px;
+    width: 300px; 
+
+    @media #{$phone} {
+        font-size: 0.8em;
+        width: 30%;             
+    }
 }
 
 // Page product
-
-
 
 .box_produit {
     display: flex;
@@ -261,10 +453,9 @@ select {
 .choisir_option {
     margin-top: 20px;
     margin-bottom: 20px;
-
 }
-.prix_and_button {
 
+.prix_and_button {
     display: flex;
     width: 30%;   
 }
@@ -296,20 +487,20 @@ select {
 // Panier
 
 .basket.flex-block {
-    color: $gold;
-   
+    color: $gold;  
 }
 
-fieldset {
-    
+fieldset {   
     padding-left: 10%;
 }
+
 .btn-delete {
     height: 30px;
     width: 60px;
 }
+
 .btn_form {
-    color: red
+    color: $gold;
 }
 // Page de confirmation
 
@@ -324,9 +515,6 @@ input {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
-
-
 
 // Footer
 

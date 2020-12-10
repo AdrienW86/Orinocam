@@ -5,8 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
+		<link rel="shortcut icon" type="image/x-icon" href="images/logo.png">
 		<script src="https://kit.fontawesome.com/3d407ecafd.js" crossorigin="anonymous"></script>
-        <title> Orinocam </title>
+        <title> Votre panier</title>
     </head>
 <body>
 
@@ -23,7 +24,7 @@
                 <li> 
                   <a class="lien_nav" href="panier.html">  <svg class="panier" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                      </svg> <span id="indexPanier">()</span></a>
+                      </svg> <span id="indexPanier"></span></a>
                     </li>
 
                  </ul>
@@ -59,6 +60,16 @@
 			<form method="post" name="form-panier">
 				<fieldset>
 					<legend>Civilité</legend>
+					<div>
+
+					<input type="radio" id="genre1" name="genre" value="Madame">
+					<label for=" choix1">Madame</label>
+				
+				
+					<input type="radio" id="genre2" name="genre" value="Monsieur">
+					<label for=" choix2">Monsieur</label>
+				</div>
+
 					<div class="form__group">
 						<div class="form__group">
 							<label for="formNom">Nom : </label>

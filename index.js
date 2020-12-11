@@ -279,10 +279,6 @@ annulerProduit = (i) => {
 };
 
 
-//-----PANIER----------//
-
-
-
 //Vérification du panier
 checkPanier = () =>{
 //Vérifier qu'il y ai au moins un produit dans le panier
@@ -293,16 +289,16 @@ if(etatPanier == null){
 alert("Il y a eu un problème avec votre panier, une action non autorisée a été faite. Veuillez recharger la page pour la corriger");
 return false
 }else if(etatPanier.length < 1 || etatPanier == null){
-console.log("Administration: ERROR =>le localStorage ne contient pas de panier")
+console.log(" Erreur :le localStorage ne contient pas de panier")
 alert("Votre panier est vide");
 return false;
 }else{
-console.log("Administration : Le panier n'est pas vide")
+console.log("Le panier n'est pas vide")
   //Si le panier n'est pas vide on rempli le products envoyé à l'API
   JSON.parse(localStorage.getItem("panier utilisateur")).forEach((produit) =>{
     products.push(produit._id);
   });
-  console.log("Administration : Ce tableau sera envoyé à l'API : " + products)
+  console.log("Ce tableau sera envoyé à l'API : " + products)
   return true;
 }
 };

@@ -578,24 +578,7 @@ select {
     }
 }
 
-// Panier
 
-.basket.flex-block {
-    color: $gold;  
-}
-
-fieldset {   
-    padding-left: 10%;
-}
-
-.btn-delete {
-    height: 30px;
-    width: 60px;
-}
-
-.btn_form {
-    color: $gold;
-}
 
 // Page de confirmation
 
@@ -622,6 +605,24 @@ footer {
     text-align: center;
 }
 
+// Panier
+
+.basket.flex-block {
+    color: $gold;  
+}
+
+fieldset {   
+    padding-left: 10%;
+}
+
+.btn-delete {
+    height: 30px;
+    width: 60px;
+}
+
+.btn_form {
+    color: $gold;
+}
 table {
    width: 50%;
    margin-left: 30%;

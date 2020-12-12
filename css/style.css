@@ -653,23 +653,6 @@ select {
   }
 }
 
-.basket.flex-block {
-  color: #6e5e14;
-}
-
-fieldset {
-  padding-left: 10%;
-}
-
-.btn-delete {
-  height: 30px;
-  width: 60px;
-}
-
-.btn_form {
-  color: #6e5e14;
-}
-
 .remerciements_achats {
   color: #6e5e14;
   font-size: 2em;
@@ -689,6 +672,23 @@ footer {
   color: whitesmoke;
   font-size: 2em;
   text-align: center;
+}
+
+.basket.flex-block {
+  color: #6e5e14;
+}
+
+fieldset {
+  padding-left: 10%;
+}
+
+.btn-delete {
+  height: 30px;
+  width: 60px;
+}
+
+.btn_form {
+  color: #6e5e14;
 }
 
 table {

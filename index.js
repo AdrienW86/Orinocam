@@ -85,7 +85,6 @@ getCam = () =>{
 
 // Création produit.html
 
-
 async function detailProduit(){
   //Collecter l'URL après le ?id= pour le récupérer uniquement sur l'API
   idCam = location.search.substring(4);
@@ -102,7 +101,7 @@ async function detailProduit(){
   document.getElementById("descriptionProduct").innerHTML = camSelect.description;
   document.getElementById("priceProduct").innerHTML = camSelect.price / 100 + " euros";
 
-  
+
   //Selon le type de produit (ligne 3) création des options
   camSelect.lenses.forEach((produit)=>{
       let optionProduit = document.createElement("option");
@@ -113,6 +112,28 @@ async function detailProduit(){
 
 //Fonction ajouter le produit au panier de l'utilisateur
 
+//L'user a maintenant un panier
+  	
+let panierUtilisateur = JSON.parse(localStorage.getItem("panier utilisateur"));
+
+//Affichage du nombre d'article dans le panier
+function nombreArticlePanier() {
+  let indexPanier = document.getElementById("indexPanier");
+  indexPanier.textContent = panierUtilisateur.length;
+}
+
+// Création local storage
+
+// Création du panier au premier chargement si inexistant
+
+if(localStorage.getItem("panier utilisateur")){
+	console.log(panierUtilisateur);
+}else{
+	console.log("Création du panier");
+  	let createPanier = [];
+  	localStorage.setItem("panier utilisateur", JSON.stringify(createPanier));
+  };
+
 addPanier = () =>{
   //Au clic de l'user pour mettre le produit dans le panier
   let inputBuy = document.getElementById("ajouterProduitPanier");
@@ -121,70 +142,23 @@ addPanier = () =>{
   //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
   panierUtilisateur.push(produits);
   localStorage.setItem("panier utilisateur", JSON.stringify(panierUtilisateur));
-  console.log(" le produit a été ajouté au panier");
+  console.log("Le produit a été ajouté au panier");
   alert("Produit ajouté au panier")
-  window.location.reload()
+  location.reload()
 });
 };
-
-// Création local storage
-
-// Création du panier au premier chargement si inexistant
-
-if(localStorage.getItem("panier utilisateur")){
-	console.log("Récupération du panier existant");
-}else{
-	console.log("Création du panier");
-  	let createPanier = [];
-  	localStorage.setItem("panier utilisateur", JSON.stringify(createPanier));
-  };
 
   	//Tableau et objet demandé par l'API pour la commande
   	let contact;
   	let products = [];
-
-	//L'user a maintenant un panier
-  	
-    let panierUtilisateur = JSON.parse(localStorage.getItem("panier utilisateur"));
-
+	
 // Création panier.html
-
-//Panier de l'utilisateur
-let panier = JSON.parse(localStorage.getItem("panier"));
-
-//Affichage du nombre d'article dans le panier
-function nombreArticlePanier() {
-  let indexPanier = document.getElementById("indexPanier");
-  indexPanier.textContent = panierUtilisateur.length;
-}
-
-//Vérification et initialisation du panier
-
-if (localStorage.getItem("panier")) {
-  console.log(panier);
-} else {
-  console.log("Le panier va être initalisé");
-  let panierInit = [];
-  localStorage.setItem("panier", JSON.stringify(panierInit));
-}
 
 //Ajout de l'article au panier de l'utilisateur
 
-ajoutPanier = () => {
-  let acheter = document.getElementById("ajout_panier");
-  acheter.addEventListener("click", async function () {
-    const ajout = await getCam();
-    panier.push(ajout);
-    localStorage.setItem("panier", JSON.stringify(panier));
-    console.log("Le produit a été ajouté au panier");
-    alert("Cet article a été ajouté dans votre panier");
-    location.reload();
-  });
-};
-
 ajouter = () =>{
 // Si la longueur du panier est supérieure à 0, on efface le message et on crée un tableau
-  if(JSON.parse(localStorage.getItem("panier utilisateur")).length > 0){
+  if(panierUtilisateur.length > 0){
     document.getElementById("panierVide").remove();
 
     //Création de la structure principale du tableau  
@@ -205,21 +179,18 @@ ajouter = () =>{
     factureSection.appendChild(facture);
     facture.appendChild(ligneTableau);
     ligneTableau.appendChild(colonneImage);
-    colonneImage.textContent ="Image du produit";
     ligneTableau.appendChild(colonneNom);
-    colonneNom.textContent = "Nom du produit";
     ligneTableau.appendChild(colonnePrixUnitaire);
-    colonnePrixUnitaire.textContent = "Prix du produit";
     ligneTableau.appendChild(colonneRemove);
     
+    colonneImage.textContent ="Image du produit";
+    colonneNom.textContent = "Nom du produit";
+    colonnePrixUnitaire.textContent = "Prix du produit";
     //Pour chaque produit du panier, on créé une ligne avec le nom, le prix
     
     //Init de l'incrémentation de l'id des lignes pour chaque produit
-    let i = 0;
-    
-    JSON.parse(localStorage.getItem("panier utilisateur")).forEach((produit)=>{
-      //Création de la ligne
-     
+     for (let i = 0; i < panierUtilisateur.length; i++) {
+         
       let ligneProduit = document.createElement("tr");
       let ligneBoxImage = document.createElement("td");
       let ligneImage = document.createElement("img");
@@ -228,16 +199,15 @@ ajouter = () =>{
       let removeProduit = document.createElement("button");
 
       //Attribution des class pour le css
-      ligneProduit.setAttribute("id", "produit"+i);
-      removeProduit.setAttribute("id", "remove"+i);
+      ligneProduit.setAttribute("id", "produit"+[i]);
+      removeProduit.setAttribute("id", "remove"+[i]);
       removeProduit.setAttribute('class', "button_supprimer");
       removeProduit.textContent = "Supprimer";
       //Pour chaque produit on créer un event sur l'icone de la corbeille pour annuler ce produit
       //bind permet de garder l'incrementation du i qui représente l'index tu panier au moment de la création de l'event
       //annulerProduit L233
-      removeProduit.addEventListener('click', annulerProduit.bind(i));
-      i++;
-
+     
+      removeProduit.addEventListener("click", (event) => {this.annulerProduit(i);})
       //Insertion dans le HTML
       facture.appendChild(ligneProduit);
       ligneProduit.appendChild(ligneBoxImage);
@@ -248,11 +218,11 @@ ajouter = () =>{
 
       //Contenu des lignes
       ligneImage.setAttribute("class", "image_produit_panier")
-      ligneImage.setAttribute("src",produit.imageUrl);
+      ligneImage.setAttribute("src",panierUtilisateur[i].imageUrl);
       ligneImage.setAttribute("alt", "image du produit dans le panier")
-      nomProduit.innerHTML = produit.name;
-      prixUnitProduit.textContent = produit.price / 100 + " €";
-  });
+      nomProduit.innerHTML = panierUtilisateur[i].name;
+      prixUnitProduit.textContent = panierUtilisateur[i].price / 100 + " €";
+  };
 
     //Dernière ligne du tableau : Total
     facture.appendChild(ligneTotal);
@@ -266,8 +236,8 @@ ajouter = () =>{
 
     //Calcule de l'addition total
     let totalPaye = 0;
-    JSON.parse(localStorage.getItem("panier utilisateur")).forEach((produit)=>{
-      totalPaye += produit.price / 100;
+    panierUtilisateur.forEach((panierUtilisateur)=>{
+      totalPaye += panierUtilisateur.price / 100;
     });
 
     //Affichage du prix total à payer dans l'addition
@@ -275,6 +245,9 @@ ajouter = () =>{
     document.getElementById("sommeTotal").textContent = totalPaye + " €";
 };
 }
+
+
+
 
 //Supprimer un produit du panier
 annulerProduit = (i) => {

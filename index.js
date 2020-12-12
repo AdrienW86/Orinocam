@@ -148,10 +148,6 @@ addPanier = () =>{
 });
 };
 
-  	//Tableau et objet demandé par l'API pour la commande
-  	let contact;
-  	let products = [];
-	
 // Création panier.html
 
 //Ajout de l'article au panier de l'utilisateur
@@ -246,9 +242,6 @@ ajouter = () =>{
 };
 }
 
-
-
-
 //Supprimer un produit du panier
 annulerProduit = (i) => {
   console.log("Enlever le produit à l'index " + i);
@@ -305,42 +298,42 @@ console.log("Le panier n'est pas vide")
   let checkMessage = "";
 
   //Récupération des inputs
-  let formNom = document.getElementById("formNom").value;
-  let formPrenom = document.getElementById("formPrenom").value;
-  let formMail = document.getElementById("formMail").value;
-  let formAdresse = document.getElementById("formAdresse").value;
-  let formVille = document.getElementById("formVille").value;
+  let userName = document.getElementById("formNom").value;
+  let userSurname = document.getElementById("formPrenom").value;
+  let userMail = document.getElementById("formMail").value;
+  let userAdress = document.getElementById("formAdresse").value;
+  let userLocation = document.getElementById("formVille").value;
 
 //tests des différents input du formulaire
         //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(formNom) == true || checkSpecialCharacter.test(formNom) == true || formNom == ""){
+        if(checkNumber.test(userName) == true || checkSpecialCharacter.test(userName) == true || userName == ""){
         	checkMessage = "Vérifier/renseigner votre nom";
         }else{
-        	console.log("Administration : Nom ok");
+        	console.log("Nom validé");
         };
         //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(formPrenom) == true || checkSpecialCharacter.test(formPrenom) == true || formPrenom == ""){
+        if(checkNumber.test(userSurname) == true || checkSpecialCharacter.test(userSurname) == true || userSurname == ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
         }else{
-        	console.log("Administration : Prénom ok");
+        	console.log("Prénom validé");
         };
         //Test du mail selon le regex de la source L256
-        if(checkMail.test(formMail) == false){
+        if(checkMail.test(userMail) == false){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
         }else{
-        	console.log("Administration : Adresse mail ok");
+        	console.log("Adresse mail validée");
         };
         //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
-        if(checkSpecialCharacter.test(formAdresse) == true || formAdresse == ""){
+        if(checkSpecialCharacter.test(userAdress) == true || userAdress == ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
         }else{
-        	console.log("Administration : Adresse ok");
+        	console.log("Adresse validée");
         };
         //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
-        if(checkSpecialCharacter.test(formVille) == true && checkNumber.test(formVille) == true || formVille == ""){
+        if(checkSpecialCharacter.test(userLocation) == true && checkNumber.test(userLocation) == true || userLocation == ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
         }else{
-        	console.log("Administration : Ville ok")
+        	console.log("Localisation validée")
         };
         //Si un des champs n'est pas bon => message d'alert avec la raison
         if(checkMessage != ""){
@@ -349,11 +342,11 @@ console.log("Le panier n'est pas vide")
         //Si tout est ok construction de l'objet contact => a revoir
         else{
         	contact = {
-        		firstName : formNom,
-        		lastName : formPrenom,
-        		address : formAdresse,
-        		city : formVille,
-        		email : formMail
+        		firstName : userName,
+        		surName : userSurname,
+            address : userAdress,
+            location: userLocation,
+        		email : userMail,
         	};
         	return contact;
         };
@@ -361,6 +354,10 @@ console.log("Le panier n'est pas vide")
 
 //Envoi du formulaire
 
+
+  	//Tableau et objet demandé par l'API pour la commande
+  	let contact;
+  	let products = [];
 
   //Fonction requet post de l'API
   const envoiFormulaire = (sendForm, APIURL) => {
@@ -391,7 +388,7 @@ console.log("Le panier n'est pas vide")
   //Au click sur le btn de validation du formulaire
   validForm = () =>{
     //Ecoute de l'event click du formulaire
-    let envoyer = document.getElementById("envoiPost");
+    let envoyer = document.getElementById("form_user");
     envoyer.addEventListener("submit", (event) => {
       event.preventDefault()
       //Lancement des verifications du panier et du form => si Ok envoi
@@ -406,7 +403,7 @@ console.log("Le panier n'est pas vide")
       //Création de l'objet à envoyer
       let commande = {
       	contact,
-      	products
+      	products,
       };
 
       let sendForm = JSON.stringify(commande);

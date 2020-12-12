@@ -622,3 +622,52 @@ footer {
     text-align: center;
 }
 
+table {
+   width: 50%;
+   margin-left: 30%;
+   margin-right: 30%;  
+   margin-top: 10%; 
+   margin-bottom: 5%;
+}
+
+th {
+    font-size: 1.5em;
+    color: $white;   
+}
+
+td {
+    border: 2px solid $white;
+    text-align: center;
+    font-size: 2em;
+    height: 130px;
+    width: 230px;   
+}
+
+#tva {
+    color: $white;
+}
+
+tr {
+    border: 2px solid $white;
+    font-family: 'Dancing Script', cursive;
+}
+
+.image_produit_panier {
+    height: 130px;
+    width: 230px; 
+}
+
+.button_supprimer {
+    height: 40px;
+    position: relative;
+    top: 80px;
+    left: 20px;
+}
+
+#sommeTotal {
+    color: $white;
+}
+
+.form {
+    font-size: 2em;
+}

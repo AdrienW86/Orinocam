@@ -183,33 +183,35 @@ ajoutPanier = () => {
 };
 
 ajouter = () =>{
-  //Vérifie si un prduit est dans le panier
+// Si la longueur du panier est supérieure à 0, on efface le message et on crée un tableau
   if(JSON.parse(localStorage.getItem("panier utilisateur")).length > 0){
-    //S'il n'est pas vide on supprime le message et on créé le tableau récapitulatif
     document.getElementById("panierVide").remove();
 
     //Création de la structure principale du tableau  
     let facture = document.createElement("table");
     let ligneTableau = document.createElement("tr");
+    let colonneImage = document.createElement("th");
     let colonneNom = document.createElement("th");
     let colonnePrixUnitaire = document.createElement("th");
     let colonneRemove = document.createElement("th");
     let ligneTotal = document.createElement("tr");
+    let ligneTVA = document.createElement("td");
     let colonneRefTotal = document.createElement("th");
     let colonnePrixPaye = document.createElement("td");
+    
 
     //Placement de la structure dans la page et du contenu des entetes
     let factureSection = document.getElementById("basket-resume");
     factureSection.appendChild(facture);
     facture.appendChild(ligneTableau);
+    ligneTableau.appendChild(colonneImage);
+    colonneImage.textContent ="Image du produit";
     ligneTableau.appendChild(colonneNom);
     colonneNom.textContent = "Nom du produit";
     ligneTableau.appendChild(colonnePrixUnitaire);
     colonnePrixUnitaire.textContent = "Prix du produit";
     ligneTableau.appendChild(colonneRemove);
-    colonneRemove.textContent = "Annuler un produit";
     
-
     //Pour chaque produit du panier, on créé une ligne avec le nom, le prix
     
     //Init de l'incrémentation de l'id des lignes pour chaque produit
@@ -217,15 +219,19 @@ ajouter = () =>{
     
     JSON.parse(localStorage.getItem("panier utilisateur")).forEach((produit)=>{
       //Création de la ligne
+     
       let ligneProduit = document.createElement("tr");
+      let ligneBoxImage = document.createElement("td");
+      let ligneImage = document.createElement("img");
       let nomProduit = document.createElement("td");
       let prixUnitProduit = document.createElement("td");
-      let removeProduit = document.createElement("i");
+      let removeProduit = document.createElement("button");
 
       //Attribution des class pour le css
       ligneProduit.setAttribute("id", "produit"+i);
       removeProduit.setAttribute("id", "remove"+i);
-      removeProduit.setAttribute('class', "fas fa-trash-alt annulerProduit");
+      removeProduit.setAttribute('class', "button_supprimer");
+      removeProduit.textContent = "Supprimer";
       //Pour chaque produit on créer un event sur l'icone de la corbeille pour annuler ce produit
       //bind permet de garder l'incrementation du i qui représente l'index tu panier au moment de la création de l'event
       //annulerProduit L233
@@ -234,11 +240,16 @@ ajouter = () =>{
 
       //Insertion dans le HTML
       facture.appendChild(ligneProduit);
+      ligneProduit.appendChild(ligneBoxImage);
+      ligneBoxImage.appendChild(ligneImage);
       ligneProduit.appendChild(nomProduit);
       ligneProduit.appendChild(prixUnitProduit);
       ligneProduit.appendChild(removeProduit);
 
       //Contenu des lignes
+      ligneImage.setAttribute("class", "image_produit_panier")
+      ligneImage.setAttribute("src",produit.imageUrl);
+      ligneImage.setAttribute("alt", "image du produit dans le panier")
       nomProduit.innerHTML = produit.name;
       prixUnitProduit.textContent = produit.price / 100 + " €";
   });
@@ -246,9 +257,12 @@ ajouter = () =>{
     //Dernière ligne du tableau : Total
     facture.appendChild(ligneTotal);
     ligneTotal.appendChild(colonneRefTotal);
-    colonneRefTotal.textContent = "Total à payer"
+    colonneRefTotal.textContent = "Total à payer";
+    ligneTotal.appendChild(ligneTVA);
+    ligneTVA.textContent = " T.V.A 10%";
     ligneTotal.appendChild(colonnePrixPaye);
-    colonnePrixPaye.setAttribute("id", "sommeTotal")
+    ligneTVA.setAttribute("id", "tva");
+    colonnePrixPaye.setAttribute("id", "sommeTotal");
 
     //Calcule de l'addition total
     let totalPaye = 0;
@@ -303,4 +317,154 @@ console.log("Le panier n'est pas vide")
 }
 };
 
+// Vérification des données saisies par l'utilisateur dans le formulaire 
 
+ //vérifie les inputs du formulaire
+ checkInput = () =>{
+  //Controle Regex
+  let checkString = /[a-zA-Z]/;
+  let checkNumber = /[0-9]/;
+  //Source pour vérification email => emailregex.com
+  let checkMail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
+  let checkSpecialCharacter = /[§!@#$%^&*(),.?":{}|<>]/;
+
+  //message fin de controle
+  let checkMessage = "";
+
+  //Récupération des inputs
+  let formNom = document.getElementById("formNom").value;
+  let formPrenom = document.getElementById("formPrenom").value;
+  let formMail = document.getElementById("formMail").value;
+  let formAdresse = document.getElementById("formAdresse").value;
+  let formVille = document.getElementById("formVille").value;
+
+//tests des différents input du formulaire
+        //Test du nom => aucun chiffre ou charactère spécial permis
+        if(checkNumber.test(formNom) == true || checkSpecialCharacter.test(formNom) == true || formNom == ""){
+        	checkMessage = "Vérifier/renseigner votre nom";
+        }else{
+        	console.log("Administration : Nom ok");
+        };
+        //Test du nom => aucun chiffre ou charactère spécial permis
+        if(checkNumber.test(formPrenom) == true || checkSpecialCharacter.test(formPrenom) == true || formPrenom == ""){
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
+        }else{
+        	console.log("Administration : Prénom ok");
+        };
+        //Test du mail selon le regex de la source L256
+        if(checkMail.test(formMail) == false){
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
+        }else{
+        	console.log("Administration : Adresse mail ok");
+        };
+        //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
+        if(checkSpecialCharacter.test(formAdresse) == true || formAdresse == ""){
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
+        }else{
+        	console.log("Administration : Adresse ok");
+        };
+        //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
+        if(checkSpecialCharacter.test(formVille) == true && checkNumber.test(formVille) == true || formVille == ""){
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
+        }else{
+        	console.log("Administration : Ville ok")
+        };
+        //Si un des champs n'est pas bon => message d'alert avec la raison
+        if(checkMessage != ""){
+        	alert("Il est nécessaire de :" + "\n" + checkMessage);
+        }
+        //Si tout est ok construction de l'objet contact => a revoir
+        else{
+        	contact = {
+        		firstName : formNom,
+        		lastName : formPrenom,
+        		address : formAdresse,
+        		city : formVille,
+        		email : formMail
+        	};
+        	return contact;
+        };
+    };
+
+//Envoi du formulaire
+
+
+  //Fonction requet post de l'API
+  const envoiFormulaire = (sendForm, APIURL) => {
+  	return new Promise((resolve)=>{
+  		let request = new XMLHttpRequest();
+  		request.onload = function() {
+  			if(this.readyState == XMLHttpRequest.DONE && this.status == 201) 
+  			{
+          //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans order-confirm.html
+          sessionStorage.setItem("order", this.responseText);
+
+          //Chargement de la page de confirmation
+          window.location = "./confirm.html";
+        
+          resolve(JSON.parse(this.responseText));
+          console.log(sendForm);
+        }else{ 
+          console.log("erreur lors de l'envoi du formulaire");        
+      }
+  };
+  request.open("POST", APIURL + "order");
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send(sendForm);
+  console.log(sendForm);
+  });
+};
+
+  //Au click sur le btn de validation du formulaire
+  validForm = () =>{
+    //Ecoute de l'event click du formulaire
+    let envoyer = document.getElementById("envoiPost");
+    envoyer.addEventListener("submit", (event) => {
+      event.preventDefault()
+      //Lancement des verifications du panier et du form => si Ok envoi
+      if(checkPanier() == true && checkInput() != null){
+        console.log("Vérification réussie");
+        panierUtilisateur.forEach((article) => {
+          products.push(article._id);
+        });
+        console.log(" le tableau sera envoyé à l'API : " + products);
+        
+
+      //Création de l'objet à envoyer
+      let commande = {
+      	contact,
+      	products
+      };
+
+      let sendForm = JSON.stringify(commande);
+      envoiFormulaire(sendForm, APIURL);
+      console.log(commande);
+     
+     //Une fois la commande faite retour à l'état initial des tableaux/objet/localStorage
+     contact = {};
+     products = [];
+     localStorage.clear();
+ }else{
+ 	console.log("Erreur");
+ };
+});
+};
+
+/*Affichage des informations sur la page de confirmation
+**********************************************/
+resultOrder = () =>{
+	if(sessionStorage.getItem("order") != null){
+    //Parse du session storage
+    let order = JSON.parse(sessionStorage.getItem("order"));
+    //Implatation de prénom et de id de commande dans le html sur la page de confirmation
+    document.getElementById("lastName").innerHTML = order.contact.lastName
+    document.getElementById("orderId").innerHTML = order.orderId
+    
+    //Suppression de la clé du sessionStorage pour renvoyer au else si actualisation de la page ou via url direct
+    sessionStorage.removeItem("order");
+}else{
+  //avertissement et redirection vers l'accueil
+  alert("Aucune commande passée, vous êtes arrivé ici par erreur");
+  window.open("./index.html");
+  }
+}

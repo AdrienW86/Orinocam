@@ -4,7 +4,7 @@ let idCam = "";
 
 // Récupération des données de l'Api
 
-getCam = () =>{
+getAllCameras = () =>{
 	return new Promise((resolve) =>{
 		let request = new XMLHttpRequest();
 		request.onreadystatechange = function() {
@@ -14,7 +14,7 @@ getCam = () =>{
 				console.log("Connecté");
 	
 			}else{
-				console.log("Echec de connexion avec l'API");
+				console.log("En attente de connexion avec l'api");
 			}
 		}
 		request.open("GET", APIURL + idCam);
@@ -25,7 +25,7 @@ getCam = () =>{
 //Création index.html
 
 	async function allCamList(){
-		const appareils = await getCam();
+		const cameras = await getAllCameras();
 
 		let listOfCam = document.createElement("section")
 		listOfCam.setAttribute("class", "list-product");
@@ -34,7 +34,7 @@ getCam = () =>{
 		box.appendChild(listOfCam);
 
 		//Pour chaque produit de l'API on créé l'encadré HTML du produit
-		appareils.forEach((produit) =>
+		cameras.forEach((produit) =>
 		{ 
       	//création des élements de la structure de la liste des produits en vente
       	//Une div conteneur/2 div(block gauche et droit)/une image/le nom(titre)/le prix(p)/le lien(a)
@@ -88,7 +88,7 @@ getCam = () =>{
 async function detailProduit(){
   //Collecter l'URL après le ?id= pour le récupérer uniquement sur l'API
   idCam = location.search.substring(4);
-  const camSelect = await getCam();
+  const camSelect = await getAllCameras();
   console.log("Page produit de"+ camSelect._id);
 
   //Faire apparaitre la fiche produit initialement en display none
@@ -138,7 +138,7 @@ addPanier = () =>{
   //Au clic de l'user pour mettre le produit dans le panier
   let inputBuy = document.getElementById("ajouterProduitPanier");
   inputBuy.addEventListener("click", async function() {
-    const produits = await getCam();
+    const produits = await getAllCameras();
   //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
   panierUtilisateur.push(produits);
   localStorage.setItem("panier utilisateur", JSON.stringify(panierUtilisateur));
@@ -152,7 +152,7 @@ addPanier = () =>{
 
 //Ajout de l'article au panier de l'utilisateur
 
-ajouter = () =>{
+ajouter = () => {
 // Si la longueur du panier est supérieure à 0, on efface le message et on crée un tableau
   if(panierUtilisateur.length > 0){
     document.getElementById("panierVide").remove();
@@ -218,6 +218,7 @@ ajouter = () =>{
       ligneImage.setAttribute("alt", "image du produit dans le panier")
       nomProduit.innerHTML = panierUtilisateur[i].name;
       prixUnitProduit.textContent = panierUtilisateur[i].price / 100 + " €";
+      console.log(panierUtilisateur[i].name);
   };
 
     //Dernière ligne du tableau : Total
@@ -225,7 +226,7 @@ ajouter = () =>{
     ligneTotal.appendChild(colonneRefTotal);
     colonneRefTotal.textContent = "Total à payer";
     ligneTotal.appendChild(ligneTVA);
-    ligneTVA.textContent = " T.V.A 10%";
+    ligneTVA.textContent = " TTC";
     ligneTotal.appendChild(colonnePrixPaye);
     ligneTVA.setAttribute("id", "tva");
     colonnePrixPaye.setAttribute("id", "sommeTotal");
@@ -237,7 +238,7 @@ ajouter = () =>{
     });
 
     //Affichage du prix total à payer dans l'addition
-    console.log("" + totalPaye);
+    console.log(totalPaye);
     document.getElementById("sommeTotal").textContent = totalPaye + " €";
 };
 }
@@ -252,45 +253,20 @@ annulerProduit = (i) => {
     localStorage.clear();
     console.log("localStorage supprimé");
     // mettre à jour le localStorage avec le nouveau panier
-    localStorage.setItem('panier utilisateur', JSON.stringify( panierUtilisateur));
+    localStorage.setItem('panier utilisateur', JSON.stringify(panierUtilisateur));
     console.log("localStorage mis à jour");
     //relancer la création de l'addition
     window.location.reload();  
 };
 
 
-//Vérification du panier
-checkPanier = () =>{
-//Vérifier qu'il y ai au moins un produit dans le panier
-let etatPanier = JSON.parse(localStorage.getItem("panier utilisateur"));
-//Si le panier est vide ou null (suppression localStorage par)=>alerte
-if(etatPanier == null){
-//Si l'utilisateur à supprimer son localStorage etatPanier sur la page basket.html et qu'il continue le process de commande
-alert("Il y a eu un problème avec votre panier, une action non autorisée a été faite. Veuillez recharger la page pour la corriger");
-return false
-}else if(etatPanier.length < 1 || etatPanier == null){
-console.log(" Erreur :le localStorage ne contient pas de panier")
-alert("Votre panier est vide");
-return false;
-}else{
-console.log("Le panier n'est pas vide")
-  //Si le panier n'est pas vide on rempli le products envoyé à l'API
-  JSON.parse(localStorage.getItem("panier utilisateur")).forEach((produit) =>{
-    products.push(produit._id);
-  });
-  console.log("Ce tableau sera envoyé à l'API : " + products)
-  return true;
-}
-};
 
 // Vérification des données saisies par l'utilisateur dans le formulaire 
 
  //vérifie les inputs du formulaire
  checkInput = () =>{
   //Controle Regex
-  let checkString = /[a-zA-Z]/;
   let checkNumber = /[0-9]/;
-  //Source pour vérification email => emailregex.com
   let checkMail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
   let checkSpecialCharacter = /[§!@#$%^&*(),.?":{}|<>]/;
 
@@ -298,39 +274,39 @@ console.log("Le panier n'est pas vide")
   let checkMessage = "";
 
   //Récupération des inputs
-  let userName = document.getElementById("formNom").value;
-  let userSurname = document.getElementById("formPrenom").value;
-  let userMail = document.getElementById("formMail").value;
-  let userAdress = document.getElementById("formAdresse").value;
-  let userLocation = document.getElementById("formVille").value;
+  let nom = document.getElementById("nom").value;
+  let prenom = document.getElementById("prenom").value;
+  let email = document.getElementById("email").value;
+  let adresse = document.getElementById("adresse").value;
+  let ville = document.getElementById("ville").value;
 
 //tests des différents input du formulaire
         //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(userName) == true || checkSpecialCharacter.test(userName) == true || userName == ""){
+        if(checkNumber.test(nom) == true || checkSpecialCharacter.test(nom) == true || nom == ""){
         	checkMessage = "Vérifier/renseigner votre nom";
         }else{
         	console.log("Nom validé");
         };
         //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(userSurname) == true || checkSpecialCharacter.test(userSurname) == true || userSurname == ""){
+        if(checkNumber.test(prenom) == true || checkSpecialCharacter.test(prenom) == true || prenom == ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
         }else{
         	console.log("Prénom validé");
         };
         //Test du mail selon le regex de la source L256
-        if(checkMail.test(userMail) == false){
+        if(checkMail.test(email) == false){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
         }else{
         	console.log("Adresse mail validée");
         };
         //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
-        if(checkSpecialCharacter.test(userAdress) == true || userAdress == ""){
+        if(checkSpecialCharacter.test(adresse) == true || adresse == ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
         }else{
         	console.log("Adresse validée");
         };
         //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
-        if(checkSpecialCharacter.test(userLocation) == true && checkNumber.test(userLocation) == true || userLocation == ""){
+        if(checkSpecialCharacter.test(ville) == true && checkNumber.test(ville) == true || ville == ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
         }else{
         	console.log("Localisation validée")
@@ -342,31 +318,47 @@ console.log("Le panier n'est pas vide")
         //Si tout est ok construction de l'objet contact => a revoir
         else{
         	contact = {
-        		firstName : userName,
-        		surName : userSurname,
-            address : userAdress,
-            location: userLocation,
-        		email : userMail,
+        		firstName : nom,
+        		lastName : prenom,
+            address : adresse,
+            city: ville,
+        		email : email,
         	};
         	return contact;
         };
     };
 
-//Envoi du formulaire
+    
+//Vérification du panier
+checkPanier = () =>{
+  //Vérifier qu'il y ai au moins un produit dans le panier
+  let etatPanier = JSON.parse(localStorage.getItem("panier utilisateur"));
+  //Si le panier est vide ou null (suppression localStorage par)=>alerte
+   if(etatPanier.length <1 || etatPanier == null) {
+    console.log("Erreur :le localStorage ne contient pas de panier")
+  alert("Votre panier est vide");
+  return false;
+  }else{
+    console.log("Le panier n'est pas vide")
+  return true;
+  }
+  };
 
+//Envoi du formulaire
 
   	//Tableau et objet demandé par l'API pour la commande
   	let contact;
-  	let products = [];
+    let products = [];
+    let formUrl = "http://localhost:3000/api/cameras/order";
 
   //Fonction requet post de l'API
-  const envoiFormulaire = (sendForm, APIURL) => {
+  const envoiFormulaire = (sendForm, formUrl) => {
   	return new Promise((resolve)=>{
   		let request = new XMLHttpRequest();
   		request.onload = function() {
   			if(this.readyState == XMLHttpRequest.DONE && this.status == 201) 
   			{
-          //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans order-confirm.html
+          //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans confirm.html
           sessionStorage.setItem("order", this.responseText);
 
           //Chargement de la page de confirmation
@@ -375,10 +367,10 @@ console.log("Le panier n'est pas vide")
           resolve(JSON.parse(this.responseText));
           console.log(sendForm);
         }else{ 
-          console.log("erreur lors de l'envoi du formulaire");        
+                  
       }
   };
-  request.open("POST", APIURL + "order");
+  request.open("POST", formUrl);
   request.setRequestHeader("Content-Type", "application/json");
   request.send(sendForm);
   console.log(sendForm);
@@ -399,7 +391,6 @@ console.log("Le panier n'est pas vide")
         });
         console.log(" le tableau sera envoyé à l'API : " + products);
         
-
       //Création de l'objet à envoyer
       let commande = {
       	contact,
@@ -407,7 +398,7 @@ console.log("Le panier n'est pas vide")
       };
 
       let sendForm = JSON.stringify(commande);
-      envoiFormulaire(sendForm, APIURL);
+      envoiFormulaire(sendForm,formUrl);
       console.log(commande);
      
      //Une fois la commande faite retour à l'état initial des tableaux/objet/localStorage
@@ -422,19 +413,102 @@ console.log("Le panier n'est pas vide")
 
 /*Affichage des informations sur la page de confirmation
 **********************************************/
-resultOrder = () =>{
+retourOrder = () =>{
 	if(sessionStorage.getItem("order") != null){
-    //Parse du session storage
-    let order = JSON.parse(sessionStorage.getItem("order"));
-    //Implatation de prénom et de id de commande dans le html sur la page de confirmation
-    document.getElementById("lastName").innerHTML = order.contact.lastName
-    document.getElementById("orderId").innerHTML = order.orderId
     
-    //Suppression de la clé du sessionStorage pour renvoyer au else si actualisation de la page ou via url direct
+    let order = JSON.parse(sessionStorage.getItem("order"));
+    
+    document.getElementById("firstName").innerHTML = order.contact.firstName;
+    document.getElementById("orderId").innerHTML = order.orderId;
+    
+    console.log(order);
     sessionStorage.removeItem("order");
 }else{
-  //avertissement et redirection vers l'accueil
-  alert("Aucune commande passée, vous êtes arrivé ici par erreur");
-  window.open("./index.html");
+ 
+  alert("Merci pour votre commande");
+  window.location("./index.html");
   }
-}
+};
+
+
+
+
+
+//------Tableau de recap de la commande dans la page de confirmation------//
+
+confirmRecap = () => {
+  //Création de la structure du tableau récapitulatif
+  let recapConfirm = document.createElement("table");
+  let ligneConfirm = document.createElement("tr");
+  let confirmPhoto = document.createElement("th");
+  let confirmNom = document.createElement("th");
+  let confirmPrixUnitaire = document.createElement("th");
+  let ligneConfirmTotal = document.createElement("tr");
+  let colonneConfirmTotal = document.createElement("th");
+  let confirmPrixPaye = document.createElement("td");
+
+  //Placement de la structure dans la page
+  let confirmPanier = document.getElementById("confirmation-recap");
+  confirmPanier.appendChild(recapConfirm);
+  recapConfirm.appendChild(ligneConfirm);
+  ligneConfirm.appendChild(confirmPhoto);
+  ligneConfirm.appendChild(confirmNom);
+  ligneConfirm.appendChild(confirmPrixUnitaire);
+
+  //contenu des entetes
+  confirmPhoto.textContent = "Article";
+  confirmNom.textContent = "Nom";
+  confirmPrixUnitaire.textContent = "Prix";
+
+  //Incrémentation de l'id des lignes pour chaque produit
+  let i = 0;
+  let order = JSON.parse(sessionStorage.getItem("order"));
+
+  order.products.forEach((orderArticle) => {
+    //Création de la ligne
+    let ligneConfirmArticle = document.createElement("tr");
+    let photoConfirmArticle = document.createElement("img");
+    let nomConfirmArticle = document.createElement("td");
+    let prixUnitConfirmArticle = document.createElement("td");
+
+    //Attribution des class pour le css
+    ligneConfirmArticle.setAttribute("id", "article_acheté" + i);
+    photoConfirmArticle.setAttribute("class", "photo_article_acheté");
+    photoConfirmArticle.setAttribute("src", orderArticle.imageUrl);
+    photoConfirmArticle.setAttribute("alt", "Photo de l'article acheté");
+
+    //Insertion dans le HTML
+    recapConfirm.appendChild(ligneConfirmArticle);
+    ligneConfirmArticle.appendChild(photoConfirmArticle);
+    ligneConfirmArticle.appendChild(nomConfirmArticle);
+    ligneConfirmArticle.appendChild(prixUnitConfirmArticle);
+
+    //Contenu des lignes
+
+    nomConfirmArticle.textContent = orderArticle.name;
+    prixUnitConfirmArticle.textContent = orderArticle.price / 100 + " €";
+  });
+
+  //Dernière ligne du tableau : Total
+  recapConfirm.appendChild(ligneConfirmTotal);
+  ligneConfirmTotal.appendChild(colonneConfirmTotal);
+  ligneConfirmTotal.setAttribute("id", "ligneSomme");
+  colonneConfirmTotal.textContent = "Total payé";
+  ligneConfirmTotal.appendChild(confirmPrixPaye);
+
+  confirmPrixPaye.setAttribute("id", "sommeConfirmTotal");
+  confirmPrixPaye.setAttribute("colspan", "4");
+  colonneConfirmTotal.setAttribute("id", "colonneConfirmTotal");
+  colonneConfirmTotal.setAttribute("colspan", "2");
+
+  //Calcule de l'addition total
+  let sommeConfirmTotal = 0;
+  order.products.forEach((orderArticle) => {
+    sommeConfirmTotal += orderArticle.price / 100;
+  });
+
+  //Affichage du prix total à payer dans l'addition
+  console.log(sommeConfirmTotal);
+  document.getElementById("sommeConfirmTotal").textContent =
+    sommeConfirmTotal + " €";
+};

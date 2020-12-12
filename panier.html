@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
 		<link rel="shortcut icon" type="image/x-icon" href="images/logo.png">
-		<script src="https://kit.fontawesome.com/3d407ecafd.js" crossorigin="anonymous"></script>
         <title> Votre panier</title>
     </head>
 <body>
@@ -61,41 +60,36 @@
 					<legend>Civilité</legend>
 					<div>
 
-					<input type="radio" id="genre1" name="genre" value="Madame">
-					<label for=" choix1">Madame</label>
-				
-				
-					<input type="radio" id="genre2" name="genre" value="Monsieur">
-					<label for=" choix2">Monsieur</label>
+					
 				</div>
 
 					<div class="form__group">
 						<div class="form__group">
-							<label for="formNom">Nom : </label>
-							<input type="text" id="formNom" class="form-control input-control" required name="formNom">
+							<label for="nom">Nom : </label>
+							<input type="text" id="nom" class="form-control input-control"  name="nom" required>
 						</div>
 						<div class="form__group">
-							<label for="formPrenom" class="right-inline">Prénom :</label>
-							<input type="text" id="formPrenom" class="form-control input-control" required name="formPrenom">
+							<label for="prenom" class="right-inline">Prénom :</label>
+							<input type="text" id="prenom" class="form-control input-control"  name="prenom" required>
 						</div>
 					</div>
 				</fieldset> 
 				<fieldset>
 					<legend>Coordonnées</legend>
 					<div class="form__group">
-						<label for="formMail">E-mail :</label>
-						<input type="email" id="formMail" class="form-control input-control" required name="formMail">
+						<label for="email">E-mail :</label>
+						<input type="email" id="email" class="form-control input-control"  name="email" required>
 					</div>
 					<div class="form__group">
-						<label for="formAdresse">Adresse :</label>
-						<input type="text" id="formAdresse" class="form-control input-control" required name="formAdresse">
+						<label for="adresse">Adresse :</label>
+						<input type="text" id="adresse" class="form-control input-control"  name="adresse" required >
 					</div>
 					<div class="form__group">
-						<label for="formVille">Ville :</label>
-						<input type="text" id="formVille" class="form-control input-control" required name="formVille">
+						<label for="ville">Ville :</label>
+						<input type="text" id="ville" class="form-control input-control"  name="ville" required>
 					</div>
 				</fieldset> 
-				<input type="button" value="Je valide mon panier et mes informations" class="btn btn--form" id="envoiPost">
+				<button id="envoiPost" type="submit" class="btn_envoi_formulaire" >  Valider mes informations</button>
 			</form>
 		</div>
 	</main>

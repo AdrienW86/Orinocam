@@ -59,7 +59,9 @@ getAllCameras = () =>{
     produitDescription.setAttribute("class", "description_produit");
     boxImage.setAttribute("src", appareilPhoto.imageUrl);
     boxImage.setAttribute("alt", "image de l'appareil photo"); 
+    produitButton.setAttribute("class", "btn_index"),
     boxLien.setAttribute("href", "product.html?id=" + appareilPhoto._id);
+    boxLien.setAttribute("class","lien_btn");
     
     listOfCam.appendChild(appareilBox);
     appareilBox.appendChild(boxPhoto); 
@@ -160,7 +162,8 @@ ajouter = () => {
 
 //Création de la structure principale du tableau 
 
-    let tableauPanier = document.createElement("table");
+    let boxTableau = document.createElement("div");
+    let tableauPanier = document.createElement("table");  
     let lignePanier = document.createElement("tr");
     let boxImagePanier = document.createElement("th");
     let nomPanier = document.createElement("th");
@@ -173,7 +176,8 @@ ajouter = () => {
 // Placement des élements
 
     let blocPanier = document.getElementById("panier_utilisateur");
-    blocPanier.appendChild(tableauPanier);
+    blocPanier.appendChild(boxTableau)
+    boxTableau.appendChild(tableauPanier);
     tableauPanier.appendChild(lignePanier);
     lignePanier.appendChild(boxImagePanier);
     lignePanier.appendChild(nomPanier);
@@ -194,6 +198,7 @@ ajouter = () => {
     let lignePrixArticle = document.createElement("td");
     let supprimerArticle = document.createElement("button");
 
+    boxTableau.setAttribute("class", "box_tableau");
     ligneArticlePanier.setAttribute("id", "produit"+[i]);
     supprimerArticle.setAttribute("id", "remove"+[i]);
     supprimerArticle.setAttribute('class', "button_supprimer");

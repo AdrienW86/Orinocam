@@ -140,38 +140,35 @@ button {
   border: 2px whitesmoke solid;
   margin-right: 40px;
   vertical-align: center;
+  height: 40px;
   width: 120px;
+  color: whitesmoke;
+}
+
+button:hover {
+  color: black;
+}
+
+button:active {
+  position: relative;
+  top: 2px;
+  right: 2px;
 }
 
 @media only screen and (max-width: 760px) {
   button {
-    position: relative;
-    top: 25px;
     width: 60px;
     margin: 0px;
     font-size: 0.7em;
     margin-left: 5px;
     margin-right: 5px;
+    margin-top: 25px;
+    margin-bottom: 10px;
   }
 }
 
-button a {
-  text-decoration: none;
-  color: whitesmoke;
-}
-
-@media only screen and (max-width: 760px) {
-  button a {
-    font-size: 0.9em;
-  }
-}
-
-button a:hover {
+.lien_btn:hover {
   color: black;
-}
-
-button button:active {
-  color: #6e5e14;
 }
 
 .banniere {
@@ -483,11 +480,11 @@ body {
   }
 }
 
-.product__img {
+.image_de_l_appareil_photo {
   width: 30%;
 }
 
-.product__name {
+.nom_appareil {
   font-size: 3em;
   color: #6e5e14;
   position: relative;
@@ -495,20 +492,11 @@ body {
 }
 
 @media only screen and (max-width: 760px) {
-  .product__name {
+  .nom_appareil {
     font-size: 2em;
     position: relative;
     top: 10px;
   }
-}
-
-.product__description {
-  width: 90%;
-  height: 400px;
-  border: 2px whitesmoke solid;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 .prix_and_button {
@@ -560,11 +548,20 @@ body {
   }
 }
 
-.product__details {
+.appareil_details {
   width: 50%;
+  padding-left: 10px;
+  padding-top: 5px;
 }
 
-.product__lentilles {
+@media only screen and (max-width: 760px) {
+  .appareil_details {
+    font-size: 0.8em;
+    padding-top: 5px;
+  }
+}
+
+.appareil_lentilles {
   font-size: 1.5em;
   color: whitesmoke;
   margin-top: 20px;
@@ -572,13 +569,13 @@ body {
 }
 
 @media only screen and (max-width: 760px) {
-  .product__lentilles {
+  .appareil_lentilles {
     font-size: 0.7em;
   }
 }
 
 @media only screen and (min-width: 760px) and (max-width: 1200px) {
-  .product__lentilles {
+  .appareil_lentilles {
     font-size: 1em;
     position: relative;
     top: 70px;
@@ -650,7 +647,7 @@ select {
   }
 }
 
-.titre__description {
+.titre_description {
   width: 30%;
   padding-left: 10px;
   font-size: 1em;
@@ -679,18 +676,17 @@ select {
 }
 
 .btn_product {
-  color: whitesmoke;
   height: 50px;
   width: 170px;
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 760px) {
   .btn_product {
     width: 100px;
-    height: 45px;
-    font-size: 1em;
+    height: 40px;
+    font-size: 0.9em;
     vertical-align: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -706,8 +702,12 @@ select {
   text-align: center;
 }
 
+#firstName {
+  color: #6e5e14;
+}
+
 #orderId {
-  color: blue;
+  color: red;
 }
 
 #tableau_facture {
@@ -742,6 +742,18 @@ th {
   margin-bottom: 15px;
 }
 
+@media only screen and (max-width: 760px) {
+  .photo_article_acheté {
+    height: 85px;
+    width: 115px;
+  }
+}
+
+.retour_accueil {
+  color: #465bef;
+  margin-left: 20px;
+}
+
 footer {
   background-color: #252525;
   height: 100px;
@@ -751,32 +763,53 @@ footer {
   text-align: center;
 }
 
+.menu {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 #panier_utilisateur {
-  width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
-  color: #6e5e14;
-}
-
-fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding-left: 10%;
-}
-
-.btn-delete {
-  height: 30px;
-  width: 60px;
-}
-
-.btn_form {
+  padding-right: 10%;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: #6e5e14;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
-table {
-  width: 50%;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 10%;
-  margin-bottom: 5%;
+.box_tableau {
+  width: 100%;
+}
+
+.box_tableau table {
+  width: 80%;
+  margin-left: 5%;
+  margin-right: 15%;
+}
+
+@media only screen and (max-width: 760px) {
+  .box_tableau table {
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  .box_tableau table {
+    font-size: 0.8em;
+  }
 }
 
 th {
@@ -790,6 +823,15 @@ td {
   font-size: 2em;
   height: 130px;
   width: 230px;
+  color: #6e5e14;
+}
+
+@media only screen and (max-width: 760px) {
+  td {
+    width: 20%;
+    height: 10px;
+    font-size: 1.5em;
+  }
 }
 
 #tva {
@@ -801,9 +843,29 @@ tr {
   font-family: 'Dancing Script', cursive;
 }
 
+@media only screen and (max-width: 760px) {
+  tr {
+    font-size: 0.8em;
+  }
+}
+
 .image_produit_panier {
   height: 170px;
   width: 230px;
+  padding-top: 3%;
+}
+
+@media only screen and (max-width: 760px) {
+  .image_produit_panier {
+    height: 85px;
+    width: 115px;
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
+  .image_produit_panier {
+    width: 200px;
+  }
 }
 
 .button_supprimer {
@@ -813,12 +875,38 @@ tr {
   left: 20px;
 }
 
+.button_supprimer:hover {
+  color: #940606;
+  font-weight: bold;
+}
+
+.button_supprimer:active {
+  position: relative;
+  top: 82px;
+  left: 22px;
+}
+
+@media only screen and (max-width: 760px) {
+  .button_supprimer {
+    font-size: 0.9em;
+    position: relative;
+    top: 5px;
+    left: 2%;
+    width: 50px;
+  }
+  .button_supprimer:active {
+    position: relative;
+    top: 7px;
+    left: 3%;
+  }
+}
+
 #montant_total {
   color: whitesmoke;
 }
 
-.form {
-  width: 100%;
+fieldset {
+  padding-left: 10%;
 }
 
 legend {
@@ -842,11 +930,23 @@ legend {
   margin-bottom: 10px;
 }
 
+@media only screen and (max-width: 760px) {
+  .formulaire .donnees_utilisateurs {
+    width: 120px;
+  }
+}
+
 .formulaire label {
   color: whitesmoke;
   width: 200px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 760px) {
+  .formulaire label {
+    width: 120px;
+  }
 }
 
 .btn_envoi_formulaire {
@@ -856,5 +956,14 @@ legend {
   margin-right: 40%;
   font-size: 2em;
   height: 40px;
+}
+
+@media only screen and (max-width: 760px) {
+  .btn_envoi_formulaire {
+    font-size: 1em;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
 }
 /*# sourceMappingURL=style.css.map */

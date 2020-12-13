@@ -197,14 +197,20 @@ ajouter = () => {
     let ligneNomArticle = document.createElement("td");
     let lignePrixArticle = document.createElement("td");
     let supprimerArticle = document.createElement("button");
-
+    let petitBtnSupprimer = document.createElement("button");
+    
     boxTableau.setAttribute("class", "box_tableau");
     ligneArticlePanier.setAttribute("id", "produit"+[i]);
     supprimerArticle.setAttribute("id", "remove"+[i]);
     supprimerArticle.setAttribute('class', "button_supprimer");
-    supprimerArticle.textContent = "Supprimer";   
-     
+    supprimerArticle.textContent = "Supprimer";
+    petitBtnSupprimer.setAttribute("class","petit_btn_supprimer");
+    
     supprimerArticle.addEventListener("click", (event) => {this.annulerProduit(i);})
+
+    // Création d'une icône de suppression pour les très petits écrans
+
+    petitBtnSupprimer.addEventListener("click", (event) => {this.annulerProduit(i);}) 
      
     tableauPanier.appendChild(ligneArticlePanier);
     ligneArticlePanier.appendChild(ligneBoxImage);
@@ -212,6 +218,7 @@ ajouter = () => {
     ligneArticlePanier.appendChild(ligneNomArticle);
     ligneArticlePanier.appendChild(lignePrixArticle);
     ligneArticlePanier.appendChild(supprimerArticle);
+    ligneArticlePanier.appendChild(petitBtnSupprimer);
     
     ligneImage.setAttribute("class", "image_produit_panier")
     ligneImage.setAttribute("src",panierUtilisateur[i].imageUrl);

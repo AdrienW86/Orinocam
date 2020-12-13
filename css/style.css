@@ -901,6 +901,45 @@ tr {
   }
 }
 
+.petit_btn_supprimer {
+  display: none;
+}
+
+@media only screen and (max-width: 330px) {
+  .button_supprimer {
+    display: none;
+  }
+  .petit_btn_supprimer {
+    display: block;
+    height: 17px;
+    width: 17px;
+    position: relative;
+    top: 15px;
+    background: whitesmoke;
+    font-weight: bold;
+    color: #6e5e14;
+    background-image: url(/images/delete.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .petit_btn_supprimer:hover {
+    background-image: url(/images/delete2.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .petit_btn_supprimer:active {
+    position: relative;
+    top: 15px;
+    height: 15px;
+    width: 15px;
+    left: 2px;
+  }
+  table {
+    position: relative;
+    right: 10px;
+  }
+}
+
 #montant_total {
   color: whitesmoke;
 }
@@ -960,7 +999,7 @@ legend {
 
 @media only screen and (max-width: 760px) {
   .btn_envoi_formulaire {
-    font-size: 1em;
+ s.map */size: 1em;
     width: 40%;
     margin-left: 30%;
     margin-right: 30%;

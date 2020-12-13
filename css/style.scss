@@ -4,7 +4,7 @@ $gold : rgb(110, 94, 20);
 $black: rgb(37, 37, 37);
 $white: rgb(245, 245, 245);
 
-
+$veryLittle:"only screen and (max-width:330px)";
 $phone:"only screen and (max-width:760px)";
 $medium:"only screen and (min-width:760px) and(max-width: 1200px)";
 $large:"only screen and (min-width: 1200px)";
@@ -751,14 +751,58 @@ tr {
         top: 5px;
         left: 2%;
         width: 50px;
-        
-    
+          
         &:active {
             position: relative;
             top: 7px;
             left: 3%;           
         }
     }      
+}
+
+.petit_btn_supprimer {
+    display: none;
+}
+
+@media #{$veryLittle} {
+
+    .button_supprimer {
+        display: none;
+    }
+
+    .petit_btn_supprimer {
+        
+        display: block;
+        height: 17px;
+        width: 17px;
+        position: relative;
+        top: 15px;
+        background: $white;
+        font-weight: bold;
+        color: $gold;
+        background-image: url(/images/delete.png);  
+        background-size: 100%;
+        background-repeat: no-repeat;
+
+            &:hover {
+                background-image: url(/images/delete2.png);  
+                background-size: 100%;
+                background-repeat: no-repeat;
+            }
+
+            &:active {
+                position: relative;
+                top: 15px;
+                height: 15px;
+                width: 15px;
+                left: 2px;
+            }
+    }
+    
+    table {
+        position: relative;
+        right: 10px;
+    }
 }
 
 #montant_total {

@@ -52,45 +52,45 @@
 
 	<main>
 		<div id="panier_utilisateur">
-			<p id="pas_de_panier">Votre panier est vide</p>
+			<p id="pas_de_panier">Le panier est vide</p>
 		</div>
 		<div class="form">
 			<form method="post" name="formulaire_panier" id="form_user">
 				<fieldset>
-					<legend>Civilité</legend>
-					<div>						
+					<legend>Identité</legend>
+					<div class="btn_radio">						
     					<input type="radio" id="genre1" name="genre" value="Madame">
-   							 <label for="choix1">Madame</label>   
+   							 <label for="choix1"> Madame</label>   
     					<input type="radio" id="genre2" name="genre" value="Monsieur">
-   							 <label for="choix2">Monsieur</label>					
+   							 <label for="choix2"> Monsieur</label>					
 					</div>
-					<div class="form__group">
-						<div class="form__group">
-							<label for="nom">Nom : </label>
-							<input type="text" id="nom" class="form-control input-control"  name="nom" required>
+					
+						<div class="formulaire">
+							<label for="nom"> Nom : </label>
+							<input type="text" id="nom" class="donnees_utilisateurs"  name="nom" required>
 						</div>
-						<div class="form__group">
-							<label for="prenom" class="right-inline">Prénom :</label>
-							<input type="text" id="prenom" class="form-control input-control"  name="prenom" required>
+						<div class="formulaire">
+							<label for="prenom" >Prénom :</label>
+							<input type="text" id="prenom" class="donnees_utilisateurs"  name="prenom" required>
 						</div>
-					</div>
+					
 				</fieldset> 
 				<fieldset>
 					<legend>Coordonnées</legend>
-					<div class="form__group">
+					<div class="formulaire">
 						<label for="email">E-mail :</label>
-						<input type="email" id="email" class="form-control input-control"  name="email" required>
+						<input type="email" id="email" class="donnees_utilisateurs"  name="email" required>
 					</div>
-					<div class="form__group">
+					<div class="formulaire">
 						<label for="adresse">Adresse :</label>
-						<input type="text" id="adresse" class="form-control input-control"  name="adresse" required >
+						<input type="text" id="adresse" class="donnees_utilisateurs"  name="adresse" required >
 					</div>
-					<div class="form__group">
+					<div class="formulaire">
 						<label for="ville">Ville :</label>
-						<input type="text" id="ville" class="form-control input-control"  name="ville" required>
+						<input type="text" id="ville" class="donnees_utilisateurs"  name="ville" required>
 					</div>
 				</fieldset> 
-				<button id="envoiPost" type="submit" class="btn_envoi_formulaire" >  Valider mes informations</button>
+				<button id="envoiPost" type="submit" class="btn_envoi_formulaire" >  Valider </button>
 			</form>
 		</div>
 	</main>

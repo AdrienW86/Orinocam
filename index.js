@@ -83,7 +83,7 @@ getAllCameras = () =>{
 
 // Création produit.html
 
-async function detailProduit(){
+async function appareilDescriptif(){
 
 // Supprimer "?id=" dans la requête
 
@@ -130,10 +130,10 @@ async function detailProduit(){
   	localStorage.setItem("panier utilisateur", JSON.stringify(createPanier));
   };
 
-  addPanier = () =>{
+  ajoutPanier = () =>{
  
-    let inputBuy = document.getElementById("ajouterProduitPanier");
-    inputBuy.addEventListener("click", async function() {
+    let ajoutPanier = document.getElementById("ajouterProduitPanier");
+    ajoutPanier.addEventListener("click", async function() {
     const produits = await getAllCameras();
 
 // Récupération du panier dans le localStorage et ajout produits
@@ -253,7 +253,6 @@ ajouter = () => {
 
 // Vérification des données saisies par l'utilisateur dans le formulaire 
 
-
  checkInput = () =>{
   //Controle Regex
     let verifNombre = /[0-9]/;
@@ -346,22 +345,23 @@ checkPanier = () =>{
 
 // Requête post vers l'API
 
-  const envoiFormulaire = (sendForm, formUrl) => {
-  	return new Promise((resolve)=>{
-  		let request = new XMLHttpRequest();
-  		request.onload = function() {
-  			if(this.readyState == XMLHttpRequest.DONE && this.status == 201) 
-  			{
-          //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans confirm.html
-          sessionStorage.setItem("order", this.responseText);
+    const envoiFormulaire = (sendForm, formUrl) => {
+  return new Promise((resolve)=>{
+  	let request = new XMLHttpRequest();
+  	request.onload = function() {
+  if(this.readyState == XMLHttpRequest.DONE && this.status == 201) {
 
-          //Chargement de la page de confirmation
-          window.location = "./confirm.html";
+//Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans confirm.html
+
+    sessionStorage.setItem("order", this.responseText);
+
+//Chargement de la page de confirmation
+    window.location = "./confirm.html";
         
-          resolve(JSON.parse(this.responseText));
-          console.log(sendForm);
-        }else{ 
-                  
+    resolve(JSON.parse(this.responseText));
+    console.log(sendForm);
+  }else{ 
+           
       }
   };
   request.open("POST", formUrl);
@@ -380,35 +380,38 @@ checkPanier = () =>{
 //Lancement des verifications du panier et du form => si Ok envoi
 
   if(checkPanier() == true && checkInput() != null){
-        console.log("Vérification réussie");
-        panierUtilisateur.forEach((article) => {
-          products.push(article._id);
-        });
-        console.log(" le tableau sera envoyé à l'API : " + products);
+    console.log("Vérification réussie");
+    panierUtilisateur.forEach((article) => {
+    products.push(article._id);
+  });
+    console.log(" le tableau sera envoyé à l'API : " + products);
         
-      //Création de l'objet à envoyer
-      let commande = {
-      	contact,
+//Création de l'objet à envoyer
+
+    let commande = {
+        contact,
       	products,
       };
 
-      let sendForm = JSON.stringify(commande);
-      envoiFormulaire(sendForm,formUrl);
+    let sendForm = JSON.stringify(commande);
+
+  envoiFormulaire(sendForm,formUrl);
       console.log(commande);
      
-     //Une fois la commande faite retour à l'état initial des tableaux/objet/localStorage
-     contact = {};
-     products = [];
-     localStorage.clear();
+//Une fois la commande faite retour à l'état initial des tableaux/objet/localStorage
+
+    contact = {};
+    products = [];
+    localStorage.clear();
  }else{
  	console.log("Erreur");
  };
 });
 };
 
-/*Affichage des informations sur la page de confirmation
-**********************************************/
-retourOrder = () =>{
+//Affichage des informations sur la page de confirmation
+
+confirmation = () =>{
 	if(sessionStorage.getItem("order") != null){
     
     let order = JSON.parse(sessionStorage.getItem("order"));
@@ -418,99 +421,98 @@ retourOrder = () =>{
     
     console.log(order);
     sessionStorage.removeItem("order");
-}else{
+  }else{
  
   alert("Merci pour votre commande");
   window.location("./index.html");
   }
 };
 
-
-
-
-
 //------Tableau de recap de la commande dans la page de confirmation------//
 
 tableauFacture = () => {
   //Création de la structure du tableau récapitulatif
-  let tableauFacture = document.createElement("table");
-  let lignTableauFacture = document.createElement("tr");
-  let tableauFacturePhoto = document.createElement("th");
-  let tableauFactureId = document.createElement("th");
-  let tableauFacturePrix = document.createElement("th");
-  let lignetableauTotal = document.createElement("tr");
-  let colonnetableauTotal = document.createElement("th");
-  let ligneTVA = document.createElement("td");
-  let tableauTotal = document.createElement("td");
+    let tableauFacture = document.createElement("table");
+    let lignTableauFacture = document.createElement("tr");
+    let tableauFacturePhoto = document.createElement("th");
+    let tableauFactureId = document.createElement("th");
+    let tableauFacturePrix = document.createElement("th");
+    let lignetableauTotal = document.createElement("tr");
+    let colonnetableauTotal = document.createElement("th");
+    let ligneTVA = document.createElement("td");
+    let tableauTotal = document.createElement("td");
 
-  //Placement de la structure dans la page
-  let confirmPanier = document.getElementById("tableau_facture");
-  confirmPanier.appendChild(tableauFacture);
-  tableauFacture.appendChild(lignTableauFacture);
-  lignTableauFacture.appendChild(tableauFacturePhoto);
-  lignTableauFacture.appendChild(tableauFactureId);
-  lignTableauFacture.appendChild(tableauFacturePrix);
+//Placement de la structure dans la page
+
+    let confirmPanier = document.getElementById("tableau_facture");
+    confirmPanier.appendChild(tableauFacture);
+    tableauFacture.appendChild(lignTableauFacture);
+    lignTableauFacture.appendChild(tableauFacturePhoto);
+    lignTableauFacture.appendChild(tableauFactureId);
+    lignTableauFacture.appendChild(tableauFacturePrix);
   
+// Contenu des balises
+    tableauFacturePhoto.textContent = "Article";
+    tableauFactureId.textContent = "Nom";
+    tableauFacturePrix.textContent = "Prix";
 
-  //contenu des entetes
-  tableauFacturePhoto.textContent = "Article";
-  tableauFactureId.textContent = "Nom";
-  tableauFacturePrix.textContent = "Prix";
+// Incrémentation de l'id des lignes pour chaque produit
 
-  //Incrémentation de l'id des lignes pour chaque produit
-  let i = 0;
-  let order = JSON.parse(sessionStorage.getItem("order"));
+    let i = 0;
+    let order = JSON.parse(sessionStorage.getItem("order"));
+    order.products.forEach((orderArticle) => {
 
-  order.products.forEach((orderArticle) => {
-    //Création de la ligne
+// Création de la ligne
+
     let ligneAchat = document.createElement("tr");
     let blocPhotoAchat = document.createElement("td");
     let photoAchat = document.createElement("img");
     let nomAchat = document.createElement("td");
     let prixAchat = document.createElement("td");
 
-    //Attribution des class pour le css
+// Attribution des class 
+
     ligneAchat.setAttribute("id", "article_acheté" + i);
     blocPhotoAchat.setAttribute("class","bloc_photo_article_acheté")
     photoAchat.setAttribute("class", "photo_article_acheté");
     photoAchat.setAttribute("src", orderArticle.imageUrl);
     photoAchat.setAttribute("alt", "Photo de l'article acheté");
 
-    //Insertion dans le HTML
+// Insertion dans le HTML
+
     tableauFacture.appendChild(ligneAchat);
     ligneAchat.appendChild(blocPhotoAchat);
     ligneAchat.appendChild(nomAchat);
     ligneAchat.appendChild(prixAchat);
     blocPhotoAchat.appendChild(photoAchat);
-    //Contenu des lignes
+
+// Contenu des lignes
 
     nomAchat.textContent = orderArticle.name;
     prixAchat.textContent = orderArticle.price / 100 + " €";
   });
 
-  //Dernière ligne du tableau : Total
-  tableauFacture.appendChild(lignetableauTotal);
-  lignetableauTotal.appendChild(colonnetableauTotal);
-  lignetableauTotal.appendChild(ligneTVA)
-  lignetableauTotal.appendChild(tableauTotal);
-  lignetableauTotal.setAttribute("id", "ligne_total");
-  ligneTVA.textContent ="T.T.C";
-  colonnetableauTotal.textContent = "Total payé";
-  
+//Dernière ligne du tableau : Total
 
-  tableauTotal.setAttribute("id", "total");
-  
-  colonnetableauTotal.setAttribute("id", "colonne_total");
-  
+    tableauFacture.appendChild(lignetableauTotal);
+    lignetableauTotal.appendChild(colonnetableauTotal);
+    lignetableauTotal.appendChild(ligneTVA)
+    lignetableauTotal.appendChild(tableauTotal);
+    lignetableauTotal.setAttribute("id", "ligne_total");
+    ligneTVA.textContent ="T.T.C";
+    colonnetableauTotal.textContent = "Total payé";
+    tableauTotal.setAttribute("id", "total");
+    colonnetableauTotal.setAttribute("id", "colonne_total");
 
-  //Calcule de l'addition total
-  let totalFacture = 0;
-  order.products.forEach((orderArticle) => {
+// Addition Final
+    let totalFacture = 0;
+    order.products.forEach((orderArticle) => {
     totalFacture += orderArticle.price / 100;
   });
 
-  //Affichage du prix total à payer dans l'addition
-  console.log(totalFacture);
-  document.getElementById("total").textContent =
-  totalFacture + " €";
+// Affichage du prix total à payer dans l'addition
+
+    console.log(totalFacture);
+    document.getElementById("total").textContent =
+    totalFacture + " €";
 };

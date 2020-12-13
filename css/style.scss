@@ -568,7 +568,7 @@ select {
     margin-bottom: 50px;
 
     @media #{$phone} {
-       width: 100px;
+        width: 100px;
         height: 45px;
         font-size: 1em;
         vertical-align: center;
@@ -578,20 +578,48 @@ select {
     }
 }
 
-
-
 // Page de confirmation
 
-.remerciements_achats {
-    color: $gold;
-    font-size :2em;
-    padding-left: 10%;
+.confirmation {
+    color: $white;
+    text-align: center;
 }
 
-input {
-    height: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+#orderId  {
+    color: blue;   
+}
+
+
+
+#tableau_facture {
+    vertical-align: center;
+    justify-content: center;
+    margin: 10%;
+    width: 80%;
+}
+
+td{
+    border: 2px solid $white;
+}
+
+tr{
+    border: 2px solid $white;
+}
+
+th{
+    border: 2px solid $white;
+}
+
+#article_acheté {
+    border: 2px solid $white;
+}
+
+.photo_article_acheté {
+    height: 267px;
+    width: 400px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+   
 }
 
 // Footer
@@ -607,7 +635,7 @@ footer {
 
 // Panier
 
-.basket.flex-block {
+#panier_utilisateur {
     color: $gold;  
 }
 
@@ -654,7 +682,7 @@ tr {
 }
 
 .image_produit_panier {
-    height: 130px;
+    height: 170px;
     width: 230px; 
 }
 
@@ -665,7 +693,7 @@ tr {
     left: 20px;
 }
 
-#sommeTotal {
+#montant_total {
     color: $white;
 }
 

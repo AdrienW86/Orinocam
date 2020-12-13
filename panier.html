@@ -50,19 +50,20 @@
 
 	 
 
-	<main class="basket flex-block">
-		<div id="basket-resume">
-			<p id="panierVide">Votre panier est vide</p>
+	<main>
+		<div id="panier_utilisateur">
+			<p id="pas_de_panier">Votre panier est vide</p>
 		</div>
 		<div class="form">
 			<form method="post" name="formulaire_panier" id="form_user">
 				<fieldset>
 					<legend>Civilité</legend>
-					<div>
-
-					
-				</div>
-
+					<div>						
+    					<input type="radio" id="genre1" name="genre" value="Madame">
+   							 <label for="choix1">Madame</label>   
+    					<input type="radio" id="genre2" name="genre" value="Monsieur">
+   							 <label for="choix2">Monsieur</label>					
+					</div>
 					<div class="form__group">
 						<div class="form__group">
 							<label for="nom">Nom : </label>
@@ -100,7 +101,7 @@
 	<script>
 		
 		ajouter();
-		validForm();
+		envoiFormulaireApi();
 		nombreArticlePanier();
 	</script>
     

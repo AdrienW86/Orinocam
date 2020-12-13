@@ -22,130 +22,128 @@ getAllCameras = () =>{
 	});
 };
 
-//Création index.html
+// Création index.html
 
 	async function allCamList(){
 		const cameras = await getAllCameras();
 
 		let listOfCam = document.createElement("section")
-		listOfCam.setAttribute("class", "list-product");
+		listOfCam.setAttribute("class", "liste_articles");
 		
 		let box = document.getElementById("box");
 		box.appendChild(listOfCam);
 
-		//Pour chaque produit de l'API on créé l'encadré HTML du produit
-		cameras.forEach((produit) =>
-		{ 
-      	//création des élements de la structure de la liste des produits en vente
-      	//Une div conteneur/2 div(block gauche et droit)/une image/le nom(titre)/le prix(p)/le lien(a)
-      	let appareilBox = document.createElement("section");
-      	let boxPhoto = document.createElement("div");
-        let produitRight = document.createElement("div");
-        let produitLastBox = document.createElement("div");
-      	let produitImage = document.createElement("img");
-        let produitNom = document.createElement("h4");
-        let produitDescription = document.createElement("p")
-        let produitPrix = document.createElement("p");
-        let produitButton = document.createElement("button");
-      	let produitLink = document.createElement("a");
+		
+		cameras.forEach((appareilPhoto) => { 
 
-        //Ajout des attributs au balise pour la création du style via le css
+// Création des balises sémantiques de la liste
+      	
+    let appareilBox = document.createElement("section");
+    let boxPhoto = document.createElement("div");
+    let boxDescription = document.createElement("div");
+    let produitLastBox = document.createElement("div");
+    let boxImage = document.createElement("img");
+    let boxNom = document.createElement("h4");
+    let produitDescription = document.createElement("p")
+    let boxPrix = document.createElement("p");
+    let produitButton = document.createElement("button");
+    let boxLien = document.createElement("a");
+
+// Création des classes
         
-        produitLastBox.setAttribute("class","produit_last_box");
-      	appareilBox.setAttribute("class", "appareil_box");
-        boxPhoto.setAttribute("class", "box_photo");
-        produitPrix.setAttribute("class", "prix");
-        produitRight.setAttribute("class", "appareil_box--bloc_description");
-        produitDescription.setAttribute("class", "description_produit");
-      	produitImage.setAttribute("src", produit.imageUrl);
-      	produitImage.setAttribute("alt", "image du produit"); 
-      	produitLink.setAttribute("href", "product.html?id=" + produit._id);
+    produitLastBox.setAttribute("class","produit_last_box");
+    appareilBox.setAttribute("class", "appareil_box");
+    boxPhoto.setAttribute("class", "box_photo");
+    boxPrix.setAttribute("class", "prix");
+    boxDescription.setAttribute("class", "appareil_box--bloc_description");
+    produitDescription.setAttribute("class", "description_produit");
+    boxImage.setAttribute("src", appareilPhoto.imageUrl);
+    boxImage.setAttribute("alt", "image de l'appareil photo"); 
+    boxLien.setAttribute("href", "product.html?id=" + appareilPhoto._id);
+    
+    listOfCam.appendChild(appareilBox);
+    appareilBox.appendChild(boxPhoto); 
+    boxPhoto.appendChild(boxImage);
+    appareilBox.appendChild(boxDescription) 
+    appareilBox.appendChild(produitLastBox); 
+    boxDescription.appendChild(boxNom);
+    boxDescription.appendChild(produitDescription);
+    produitLastBox.appendChild(boxPrix);
+    produitLastBox.appendChild(produitButton);
+    produitButton.appendChild(boxLien);
 
-     	//Block conteneur en flex
-      	//Block gauche comprend l'image du produit
-     	//Bloc droit comprend le nom/prix/le lien du produit
-     	listOfCam.appendChild(appareilBox);
-     	appareilBox.appendChild(boxPhoto);
-     	boxPhoto.appendChild(produitImage);
-      appareilBox.appendChild(produitRight);
-      appareilBox.appendChild(produitLastBox); 
-     	produitRight.appendChild(produitNom);
-      produitRight.appendChild(produitDescription);
-      produitLastBox.appendChild(produitPrix);
-      produitLastBox.appendChild(produitButton);
-      produitButton.appendChild(produitLink)
+// Création du contenu
 
-      	//Déterminer le contenu des balises
-        produitNom.textContent = produit.name;
-        produitDescription.textContent = produit.description;
-      	produitPrix.textContent = produit.price / 100 + " €";
-      	produitLink.textContent = "Voir le produit";
-      });
-	};
+    boxNom.textContent = appareilPhoto.name;
+    produitDescription.textContent = appareilPhoto.description;
+    boxPrix.textContent = appareilPhoto.price / 100 + " €";
+    boxLien.textContent = "Voir l'article";
+  });
+};
 
 // Création produit.html
 
 async function detailProduit(){
-  //Collecter l'URL après le ?id= pour le récupérer uniquement sur l'API
-  idCam = location.search.substring(4);
-  const camSelect = await getAllCameras();
-  console.log("Page produit de"+ camSelect._id);
 
-  //Faire apparaitre la fiche produit initialement en display none
-  let section = document.getElementById("section");
-  section.style.display = "block";
+// Supprimer "?id=" dans la requête
+
+    idCam = location.search.substring(4);
+    const camSelect = await getAllCameras();
+    console.log("Page produit de"+ camSelect._id);
+
+    let descriptif = document.getElementById("section");
   
-  //Remplissage de la fiche produit
-  document.getElementById("imgProduct").setAttribute("src",camSelect.imageUrl);
-  document.getElementById("nameProduct").innerHTML = camSelect.name;
-  document.getElementById("descriptionProduct").innerHTML = camSelect.description;
-  document.getElementById("priceProduct").innerHTML = camSelect.price / 100 + " euros";
+// Création de la fiche descriptive de l'appareil
+
+    document.getElementById("image_de_l'appareil").setAttribute("src",camSelect.imageUrl);
+    document.getElementById("nom_de_l'appareil").innerHTML = camSelect.name;
+    document.getElementById("description_de_l'appareil").innerHTML = camSelect.description;
+    document.getElementById("prix_de_l'appareil").innerHTML = camSelect.price / 100 + " euros";
 
 
-  //Selon le type de produit (ligne 3) création des options
-  camSelect.lenses.forEach((produit)=>{
-      let optionProduit = document.createElement("option");
-      document.getElementById("optionSelect").appendChild(optionProduit).innerHTML = produit;
-    });
-  }
-;
+  camSelect.lenses.forEach((appareilPhoto)=>{
+      let optionAppareil = document.createElement("option");
+      document.getElementById("option_appareil").appendChild(optionAppareil).innerHTML = appareilPhoto;
+  });
+};
 
-//Fonction ajouter le produit au panier de l'utilisateur
-
-//L'user a maintenant un panier
+// Ajouter un produit au panier
   	
-let panierUtilisateur = JSON.parse(localStorage.getItem("panier utilisateur"));
+    let panierUtilisateur = JSON.parse(localStorage.getItem("panier utilisateur"));
 
-//Affichage du nombre d'article dans le panier
-function nombreArticlePanier() {
-  let indexPanier = document.getElementById("indexPanier");
-  indexPanier.textContent = panierUtilisateur.length;
+// Affichage du nombre d'article dans le panier
+
+  function nombreArticlePanier() {
+    let indexPanier = document.getElementById("indexPanier");
+    indexPanier.textContent = panierUtilisateur.length;
 }
 
 // Création local storage
 
 // Création du panier au premier chargement si inexistant
 
-if(localStorage.getItem("panier utilisateur")){
-	console.log(panierUtilisateur);
-}else{
-	console.log("Création du panier");
+  if(localStorage.getItem("panier utilisateur")){
+	  console.log(panierUtilisateur);
+  }else{
+	  console.log("Création du panier");
   	let createPanier = [];
   	localStorage.setItem("panier utilisateur", JSON.stringify(createPanier));
   };
 
-addPanier = () =>{
-  //Au clic de l'user pour mettre le produit dans le panier
-  let inputBuy = document.getElementById("ajouterProduitPanier");
-  inputBuy.addEventListener("click", async function() {
+  addPanier = () =>{
+ 
+    let inputBuy = document.getElementById("ajouterProduitPanier");
+    inputBuy.addEventListener("click", async function() {
     const produits = await getAllCameras();
-  //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
-  panierUtilisateur.push(produits);
-  localStorage.setItem("panier utilisateur", JSON.stringify(panierUtilisateur));
-  console.log("Le produit a été ajouté au panier");
-  alert("Produit ajouté au panier")
-  location.reload()
-});
+
+// Récupération du panier dans le localStorage et ajout produits
+
+    panierUtilisateur.push(produits);
+    localStorage.setItem("panier utilisateur", JSON.stringify(panierUtilisateur));
+    console.log("Le produit a été ajouté au panier");
+    alert("Produit ajouté au panier")
+    location.reload()
+  });
 };
 
 // Création panier.html
@@ -153,205 +151,201 @@ addPanier = () =>{
 //Ajout de l'article au panier de l'utilisateur
 
 ajouter = () => {
-// Si la longueur du panier est supérieure à 0, on efface le message et on crée un tableau
+
   if(panierUtilisateur.length > 0){
-    document.getElementById("panierVide").remove();
 
-    //Création de la structure principale du tableau  
-    let facture = document.createElement("table");
-    let ligneTableau = document.createElement("tr");
-    let colonneImage = document.createElement("th");
-    let colonneNom = document.createElement("th");
-    let colonnePrixUnitaire = document.createElement("th");
-    let colonneRemove = document.createElement("th");
-    let ligneTotal = document.createElement("tr");
-    let ligneTVA = document.createElement("td");
-    let colonneRefTotal = document.createElement("th");
-    let colonnePrixPaye = document.createElement("td");
-    
+// Si le panier contient un article on efface le message
 
-    //Placement de la structure dans la page et du contenu des entetes
-    let factureSection = document.getElementById("basket-resume");
-    factureSection.appendChild(facture);
-    facture.appendChild(ligneTableau);
-    ligneTableau.appendChild(colonneImage);
-    ligneTableau.appendChild(colonneNom);
-    ligneTableau.appendChild(colonnePrixUnitaire);
-    ligneTableau.appendChild(colonneRemove);
+    document.getElementById("pas_de_panier").remove(); 
+
+//Création de la structure principale du tableau 
+
+    let tableauPanier = document.createElement("table");
+    let lignePanier = document.createElement("tr");
+    let boxImagePanier = document.createElement("th");
+    let nomPanier = document.createElement("th");
+    let prixArticlePanier = document.createElement("th");
+    let totalPanier = document.createElement("tr");
+    let taxePanier = document.createElement("td");
+    let colonneTotalPanier = document.createElement("th");
+    let totalPrixPanier = document.createElement("td");
     
-    colonneImage.textContent ="Image du produit";
-    colonneNom.textContent = "Nom du produit";
-    colonnePrixUnitaire.textContent = "Prix du produit";
-    //Pour chaque produit du panier, on créé une ligne avec le nom, le prix
-    
-    //Init de l'incrémentation de l'id des lignes pour chaque produit
-     for (let i = 0; i < panierUtilisateur.length; i++) {
+// Placement des élements
+
+    let blocPanier = document.getElementById("panier_utilisateur");
+    blocPanier.appendChild(tableauPanier);
+    tableauPanier.appendChild(lignePanier);
+    lignePanier.appendChild(boxImagePanier);
+    lignePanier.appendChild(nomPanier);
+    lignePanier.appendChild(prixArticlePanier);
+      
+    boxImagePanier.textContent ="Image de l'article";
+    nomPanier.textContent = "Nom de l'article";
+    prixArticlePanier.textContent = "Prix de l'article";
+   
+//Incrémentation de l'id des lignes pour chaque produit
+
+  for (let i = 0; i < panierUtilisateur.length; i++) {
          
-      let ligneProduit = document.createElement("tr");
-      let ligneBoxImage = document.createElement("td");
-      let ligneImage = document.createElement("img");
-      let nomProduit = document.createElement("td");
-      let prixUnitProduit = document.createElement("td");
-      let removeProduit = document.createElement("button");
+    let ligneArticlePanier = document.createElement("tr");
+    let ligneBoxImage = document.createElement("td");
+    let ligneImage = document.createElement("img");
+    let ligneNomArticle = document.createElement("td");
+    let lignePrixArticle = document.createElement("td");
+    let supprimerArticle = document.createElement("button");
 
-      //Attribution des class pour le css
-      ligneProduit.setAttribute("id", "produit"+[i]);
-      removeProduit.setAttribute("id", "remove"+[i]);
-      removeProduit.setAttribute('class', "button_supprimer");
-      removeProduit.textContent = "Supprimer";
-      //Pour chaque produit on créer un event sur l'icone de la corbeille pour annuler ce produit
-      //bind permet de garder l'incrementation du i qui représente l'index tu panier au moment de la création de l'event
-      //annulerProduit L233
+    ligneArticlePanier.setAttribute("id", "produit"+[i]);
+    supprimerArticle.setAttribute("id", "remove"+[i]);
+    supprimerArticle.setAttribute('class', "button_supprimer");
+    supprimerArticle.textContent = "Supprimer";   
      
-      removeProduit.addEventListener("click", (event) => {this.annulerProduit(i);})
-      //Insertion dans le HTML
-      facture.appendChild(ligneProduit);
-      ligneProduit.appendChild(ligneBoxImage);
-      ligneBoxImage.appendChild(ligneImage);
-      ligneProduit.appendChild(nomProduit);
-      ligneProduit.appendChild(prixUnitProduit);
-      ligneProduit.appendChild(removeProduit);
-
-      //Contenu des lignes
-      ligneImage.setAttribute("class", "image_produit_panier")
-      ligneImage.setAttribute("src",panierUtilisateur[i].imageUrl);
-      ligneImage.setAttribute("alt", "image du produit dans le panier")
-      nomProduit.innerHTML = panierUtilisateur[i].name;
-      prixUnitProduit.textContent = panierUtilisateur[i].price / 100 + " €";
-      console.log(panierUtilisateur[i].name);
-  };
-
-    //Dernière ligne du tableau : Total
-    facture.appendChild(ligneTotal);
-    ligneTotal.appendChild(colonneRefTotal);
-    colonneRefTotal.textContent = "Total à payer";
-    ligneTotal.appendChild(ligneTVA);
-    ligneTVA.textContent = " TTC";
-    ligneTotal.appendChild(colonnePrixPaye);
-    ligneTVA.setAttribute("id", "tva");
-    colonnePrixPaye.setAttribute("id", "sommeTotal");
-
-    //Calcule de l'addition total
-    let totalPaye = 0;
-    panierUtilisateur.forEach((panierUtilisateur)=>{
-      totalPaye += panierUtilisateur.price / 100;
-    });
-
-    //Affichage du prix total à payer dans l'addition
-    console.log(totalPaye);
-    document.getElementById("sommeTotal").textContent = totalPaye + " €";
+    supprimerArticle.addEventListener("click", (event) => {this.annulerProduit(i);})
+     
+    tableauPanier.appendChild(ligneArticlePanier);
+    ligneArticlePanier.appendChild(ligneBoxImage);
+    ligneBoxImage.appendChild(ligneImage);
+    ligneArticlePanier.appendChild(ligneNomArticle);
+    ligneArticlePanier.appendChild(lignePrixArticle);
+    ligneArticlePanier.appendChild(supprimerArticle);
+    
+    ligneImage.setAttribute("class", "image_produit_panier")
+    ligneImage.setAttribute("src",panierUtilisateur[i].imageUrl);
+    ligneImage.setAttribute("alt", "image du produit dans le panier")
+    ligneNomArticle.innerHTML = panierUtilisateur[i].name;
+    lignePrixArticle.textContent = panierUtilisateur[i].price / 100 + " €";
+    console.log(panierUtilisateur[i].name);
 };
+
+// Total
+
+    tableauPanier.appendChild(totalPanier);
+    totalPanier.appendChild(colonneTotalPanier);
+    colonneTotalPanier.textContent = "Total";
+    totalPanier.appendChild(taxePanier);
+    taxePanier.textContent = " TTC";
+    totalPanier.appendChild(totalPrixPanier);
+    taxePanier.setAttribute("id", "tva");
+    totalPrixPanier.setAttribute("id", "montant_total");
+
+// Montant total
+
+    let MontantTotal = 0;
+    panierUtilisateur.forEach((panierUtilisateur)=>{
+    MontantTotal += panierUtilisateur.price / 100;
+});   
+    console.log(MontantTotal);
+    document.getElementById("montant_total").textContent = MontantTotal + " €";
+  };
 }
 
-//Supprimer un produit du panier
-annulerProduit = (i) => {
-  console.log("Enlever le produit à l'index " + i);
-    //recupérer le array
+// Supprimer un produit du panier
+
+  annulerProduit = (i) => {
+    console.log("Enlever le produit à l'index " + i);
     panierUtilisateur.splice(i, 1); 
     console.log(panierUtilisateur);
-    //vide le localstorage
     localStorage.clear();
     console.log("localStorage supprimé");
-    // mettre à jour le localStorage avec le nouveau panier
     localStorage.setItem('panier utilisateur', JSON.stringify(panierUtilisateur));
     console.log("localStorage mis à jour");
-    //relancer la création de l'addition
     window.location.reload();  
 };
 
-
-
 // Vérification des données saisies par l'utilisateur dans le formulaire 
 
- //vérifie les inputs du formulaire
+
  checkInput = () =>{
   //Controle Regex
-  let checkNumber = /[0-9]/;
-  let checkMail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
-  let checkSpecialCharacter = /[§!@#$%^&*(),.?":{}|<>]/;
+    let verifNombre = /[0-9]/;
+    let verifEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
+    let verifSymbole = /[§!@#$%^&*(),.?":{}|<>]/;
 
-  //message fin de controle
-  let checkMessage = "";
+//message fin de controle
+    let verifMessage = "";
 
-  //Récupération des inputs
-  let nom = document.getElementById("nom").value;
-  let prenom = document.getElementById("prenom").value;
-  let email = document.getElementById("email").value;
-  let adresse = document.getElementById("adresse").value;
-  let ville = document.getElementById("ville").value;
+//Récupération des données
 
-//tests des différents input du formulaire
-        //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(nom) == true || checkSpecialCharacter.test(nom) == true || nom == ""){
-        	checkMessage = "Vérifier/renseigner votre nom";
-        }else{
-        	console.log("Nom validé");
+    let nom = document.getElementById("nom").value;
+    let prenom = document.getElementById("prenom").value;
+    let email = document.getElementById("email").value;
+    let adresse = document.getElementById("adresse").value;
+    let ville = document.getElementById("ville").value;
+
+// Test Formulaire
+        
+  if(verifNombre.test(nom) == true || verifSymbole.test(nom) == true || nom == ""){
+    verifMessage = "Vérifier/renseigner votre nom";
+  }else{
+    console.log("Nom validé");
+  };
+// Nom => aucun chiffre ou charactère spécial permis
+  if(verifNombre.test(prenom) == true || verifSymbole.test(prenom) == true || prenom == ""){
+  	verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre prénom";
+  }else{
+    console.log("Prénom validé");
         };
-        //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(prenom) == true || checkSpecialCharacter.test(prenom) == true || prenom == ""){
-        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
-        }else{
-        	console.log("Prénom validé");
-        };
-        //Test du mail selon le regex de la source L256
-        if(checkMail.test(email) == false){
-        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
-        }else{
-        	console.log("Adresse mail validée");
-        };
-        //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
-        if(checkSpecialCharacter.test(adresse) == true || adresse == ""){
-        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
-        }else{
-        	console.log("Adresse validée");
-        };
-        //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
-        if(checkSpecialCharacter.test(ville) == true && checkNumber.test(ville) == true || ville == ""){
-        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
-        }else{
-        	console.log("Localisation validée")
-        };
+//  Email 
+  if(verifEmail.test(email) == false){
+    verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre email";
+  }else{
+    console.log("Adresse mail validée");
+  };
+// Adresse
+  if(verifSymbole.test(adresse) == true || adresse == ""){
+    verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre adresse";
+  }else{
+    console.log("Adresse validée");
+  };
+// Ville 
+  if(verifSymbole.test(ville) == true && verifNombre.test(ville) == true || ville == ""){
+    verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre ville"
+  }else{
+    console.log("Localisation validée")
+  };
         //Si un des champs n'est pas bon => message d'alert avec la raison
-        if(checkMessage != ""){
-        	alert("Il est nécessaire de :" + "\n" + checkMessage);
+  if(verifMessage != ""){
+        	alert("Il est nécessaire de :" + "\n" + verifMessage);
         }
-        //Si tout est ok construction de l'objet contact => a revoir
-        else{
-        	contact = {
-        		firstName : nom,
-        		lastName : prenom,
-            address : adresse,
-            city: ville,
-        		email : email,
-        	};
-        	return contact;
-        };
-    };
+  else{
+    contact = {
+    firstName : nom,
+    lastName : prenom,
+    address : adresse,
+    city: ville,
+    email : email,
+  };
 
-    
+  return contact;
+  };
+};
+   
 //Vérification du panier
+
 checkPanier = () =>{
-  //Vérifier qu'il y ai au moins un produit dans le panier
-  let etatPanier = JSON.parse(localStorage.getItem("panier utilisateur"));
-  //Si le panier est vide ou null (suppression localStorage par)=>alerte
-   if(etatPanier.length <1 || etatPanier == null) {
-    console.log("Erreur :le localStorage ne contient pas de panier")
-  alert("Votre panier est vide");
+  
+// Le panier ne doit pas être vide
+
+    let etatPanier = JSON.parse(localStorage.getItem("panier utilisateur"));
+  if(etatPanier.length <1 || etatPanier == null) {
+    console.log("Erreur: le localStorage ne contient pas de panier")
+    alert("Votre panier est vide");
   return false;
   }else{
-    console.log("Le panier n'est pas vide")
+    console.log("Le panier est rempli")
   return true;
   }
-  };
+};
 
 //Envoi du formulaire
 
-  	//Tableau et objet demandé par l'API pour la commande
+//Tableau et objet pour l'API
+
   	let contact;
     let products = [];
     let formUrl = "http://localhost:3000/api/cameras/order";
 
-  //Fonction requet post de l'API
+// Requête post vers l'API
+
   const envoiFormulaire = (sendForm, formUrl) => {
   	return new Promise((resolve)=>{
   		let request = new XMLHttpRequest();
@@ -377,14 +371,15 @@ checkPanier = () =>{
   });
 };
 
-  //Au click sur le btn de validation du formulaire
-  validForm = () =>{
-    //Ecoute de l'event click du formulaire
+// Envoi du Formulaire
+  envoiFormulaireApi = () =>{
+
     let envoyer = document.getElementById("form_user");
     envoyer.addEventListener("submit", (event) => {
-      event.preventDefault()
-      //Lancement des verifications du panier et du form => si Ok envoi
-      if(checkPanier() == true && checkInput() != null){
+    event.preventDefault()
+//Lancement des verifications du panier et du form => si Ok envoi
+
+  if(checkPanier() == true && checkInput() != null){
         console.log("Vérification réussie");
         panierUtilisateur.forEach((article) => {
           products.push(article._id);
@@ -436,29 +431,31 @@ retourOrder = () =>{
 
 //------Tableau de recap de la commande dans la page de confirmation------//
 
-confirmRecap = () => {
+tableauFacture = () => {
   //Création de la structure du tableau récapitulatif
-  let recapConfirm = document.createElement("table");
-  let ligneConfirm = document.createElement("tr");
-  let confirmPhoto = document.createElement("th");
-  let confirmNom = document.createElement("th");
-  let confirmPrixUnitaire = document.createElement("th");
-  let ligneConfirmTotal = document.createElement("tr");
-  let colonneConfirmTotal = document.createElement("th");
-  let confirmPrixPaye = document.createElement("td");
+  let tableauFacture = document.createElement("table");
+  let lignTableauFacture = document.createElement("tr");
+  let tableauFacturePhoto = document.createElement("th");
+  let tableauFactureId = document.createElement("th");
+  let tableauFacturePrix = document.createElement("th");
+  let lignetableauTotal = document.createElement("tr");
+  let colonnetableauTotal = document.createElement("th");
+  let ligneTVA = document.createElement("td");
+  let tableauTotal = document.createElement("td");
 
   //Placement de la structure dans la page
-  let confirmPanier = document.getElementById("confirmation-recap");
-  confirmPanier.appendChild(recapConfirm);
-  recapConfirm.appendChild(ligneConfirm);
-  ligneConfirm.appendChild(confirmPhoto);
-  ligneConfirm.appendChild(confirmNom);
-  ligneConfirm.appendChild(confirmPrixUnitaire);
+  let confirmPanier = document.getElementById("tableau_facture");
+  confirmPanier.appendChild(tableauFacture);
+  tableauFacture.appendChild(lignTableauFacture);
+  lignTableauFacture.appendChild(tableauFacturePhoto);
+  lignTableauFacture.appendChild(tableauFactureId);
+  lignTableauFacture.appendChild(tableauFacturePrix);
+  
 
   //contenu des entetes
-  confirmPhoto.textContent = "Article";
-  confirmNom.textContent = "Nom";
-  confirmPrixUnitaire.textContent = "Prix";
+  tableauFacturePhoto.textContent = "Article";
+  tableauFactureId.textContent = "Nom";
+  tableauFacturePrix.textContent = "Prix";
 
   //Incrémentation de l'id des lignes pour chaque produit
   let i = 0;
@@ -466,49 +463,54 @@ confirmRecap = () => {
 
   order.products.forEach((orderArticle) => {
     //Création de la ligne
-    let ligneConfirmArticle = document.createElement("tr");
-    let photoConfirmArticle = document.createElement("img");
-    let nomConfirmArticle = document.createElement("td");
-    let prixUnitConfirmArticle = document.createElement("td");
+    let ligneAchat = document.createElement("tr");
+    let blocPhotoAchat = document.createElement("td");
+    let photoAchat = document.createElement("img");
+    let nomAchat = document.createElement("td");
+    let prixAchat = document.createElement("td");
 
     //Attribution des class pour le css
-    ligneConfirmArticle.setAttribute("id", "article_acheté" + i);
-    photoConfirmArticle.setAttribute("class", "photo_article_acheté");
-    photoConfirmArticle.setAttribute("src", orderArticle.imageUrl);
-    photoConfirmArticle.setAttribute("alt", "Photo de l'article acheté");
+    ligneAchat.setAttribute("id", "article_acheté" + i);
+    blocPhotoAchat.setAttribute("class","bloc_photo_article_acheté")
+    photoAchat.setAttribute("class", "photo_article_acheté");
+    photoAchat.setAttribute("src", orderArticle.imageUrl);
+    photoAchat.setAttribute("alt", "Photo de l'article acheté");
 
     //Insertion dans le HTML
-    recapConfirm.appendChild(ligneConfirmArticle);
-    ligneConfirmArticle.appendChild(photoConfirmArticle);
-    ligneConfirmArticle.appendChild(nomConfirmArticle);
-    ligneConfirmArticle.appendChild(prixUnitConfirmArticle);
-
+    tableauFacture.appendChild(ligneAchat);
+    ligneAchat.appendChild(blocPhotoAchat);
+    ligneAchat.appendChild(nomAchat);
+    ligneAchat.appendChild(prixAchat);
+    blocPhotoAchat.appendChild(photoAchat);
     //Contenu des lignes
 
-    nomConfirmArticle.textContent = orderArticle.name;
-    prixUnitConfirmArticle.textContent = orderArticle.price / 100 + " €";
+    nomAchat.textContent = orderArticle.name;
+    prixAchat.textContent = orderArticle.price / 100 + " €";
   });
 
   //Dernière ligne du tableau : Total
-  recapConfirm.appendChild(ligneConfirmTotal);
-  ligneConfirmTotal.appendChild(colonneConfirmTotal);
-  ligneConfirmTotal.setAttribute("id", "ligneSomme");
-  colonneConfirmTotal.textContent = "Total payé";
-  ligneConfirmTotal.appendChild(confirmPrixPaye);
+  tableauFacture.appendChild(lignetableauTotal);
+  lignetableauTotal.appendChild(colonnetableauTotal);
+  lignetableauTotal.appendChild(ligneTVA)
+  lignetableauTotal.appendChild(tableauTotal);
+  lignetableauTotal.setAttribute("id", "ligne_total");
+  ligneTVA.textContent ="T.T.C";
+  colonnetableauTotal.textContent = "Total payé";
+  
 
-  confirmPrixPaye.setAttribute("id", "sommeConfirmTotal");
-  confirmPrixPaye.setAttribute("colspan", "4");
-  colonneConfirmTotal.setAttribute("id", "colonneConfirmTotal");
-  colonneConfirmTotal.setAttribute("colspan", "2");
+  tableauTotal.setAttribute("id", "total");
+  
+  colonnetableauTotal.setAttribute("id", "colonne_total");
+  
 
   //Calcule de l'addition total
-  let sommeConfirmTotal = 0;
+  let totalFacture = 0;
   order.products.forEach((orderArticle) => {
-    sommeConfirmTotal += orderArticle.price / 100;
+    totalFacture += orderArticle.price / 100;
   });
 
   //Affichage du prix total à payer dans l'addition
-  console.log(sommeConfirmTotal);
-  document.getElementById("sommeConfirmTotal").textContent =
-    sommeConfirmTotal + " €";
+  console.log(totalFacture);
+  document.getElementById("total").textContent =
+  totalFacture + " €";
 };

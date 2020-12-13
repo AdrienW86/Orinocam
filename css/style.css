@@ -1,13 +1,15 @@
+@charset "UTF-8";
 h1 {
-  z-index: 10;
+  z-index: +10;
   color: whitesmoke;
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   h1 {
     display: none;
     right: 20px;
@@ -15,13 +17,15 @@ h1 {
     font-size: 1em;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   h1 {
     right: 20px;
     top: 330px;
     font-size: 1.7em;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   h1 {
     left: 60%;
@@ -30,26 +34,29 @@ h1 {
 }
 
 h2 {
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   text-decoration: underline;
   font-weight: bold;
   position: relative;
   text-align: center;
   color: #6e5e14;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   h2 {
     font-size: 1em;
     margin-bottom: 10px;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   h2 {
     font-size: 1.7em;
     margin-top: 5%;
     margin-bottom: 5%;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   h2 {
     font-size: 2.5em;
@@ -59,21 +66,24 @@ h2 {
 }
 
 h3 {
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   color: whitesmoke;
   font-size: 2em;
   padding-left: 30px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   h3 {
     font-size: 0.7em;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   h3 {
     font-size: 1.2em;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   h3 {
     font-size: 2em;
@@ -81,19 +91,20 @@ h3 {
 }
 
 h4 {
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   font-size: 2em;
   text-align: left;
   color: #6e5e14;
   padding-left: 10px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   h4 {
     font-size: 1em;
   }
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width: 760px) {
   .icone_appareil_photo {
     font-size: 1rem;
     margin-left: 5px;
@@ -102,7 +113,8 @@ h4 {
     top: 7px;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   .icone_appareil_photo {
     font-size: 1.7rem;
     margin-left: 15px;
@@ -111,6 +123,7 @@ h4 {
     top: 7px;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   .icone_appareil_photo {
     font-size: 2.5rem;
@@ -129,7 +142,8 @@ button {
   vertical-align: center;
   width: 120px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   button {
     position: relative;
     top: 25px;
@@ -140,18 +154,22 @@ button {
     margin-right: 5px;
   }
 }
+
 button a {
   text-decoration: none;
   color: whitesmoke;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   button a {
     font-size: 0.9em;
   }
 }
+
 button a:hover {
   color: black;
 }
+
 button button:active {
   color: #6e5e14;
 }
@@ -161,19 +179,22 @@ button button:active {
   background-size: 100%;
   background-repeat: no-repeat;
   width: 100%;
-  z-index: 10;
+  z-index: +10;
   margin: 0px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .banniere {
     height: 80px;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   .banniere {
     height: 230px;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   .banniere {
     height: 290px;
@@ -191,7 +212,7 @@ button button:active {
 
 .lien_nav {
   text-decoration: none;
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   font-size: 1em;
   color: whitesmoke;
 }
@@ -209,18 +230,21 @@ ul {
   -ms-flex-line-pack: distribute;
       align-content: space-around;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   ul {
     font-size: 1em;
     margin: auto;
     width: 95%;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   ul {
     font-size: 3em;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   ul {
     font-size: 3em;
@@ -241,7 +265,8 @@ li {
   color: #6e5e14;
   text-decoration: none;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   li {
     width: 33%;
     margin: 0px;
@@ -262,18 +287,21 @@ li {
 
 #indexPanier {
   color: #6e5e14;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   #indexPanier {
     font-size: 1em;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   #indexPanier {
     font-size: 1.2em;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   #indexPanier {
     font-size: 1.2em;
@@ -292,7 +320,7 @@ body {
   overflow: hidden;
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width: 760px) {
   img {
     width: 100%;
     height: 100%;
@@ -300,7 +328,7 @@ body {
   }
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width: 760px) {
   .liste-product {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -310,7 +338,7 @@ body {
   }
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width: 760px) {
   .box_photo {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -319,7 +347,8 @@ body {
     height: 100px;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   .box_photo {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -334,6 +363,7 @@ body {
     padding: 20px;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   .box_photo {
     display: -webkit-box;
@@ -358,7 +388,8 @@ body {
   border: 2px whitesmoke solid;
   width: 100%;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .appareil_box {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -379,7 +410,8 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .appareil_box--bloc_description {
     width: 50%;
     font-size: 0.7em;
@@ -395,7 +427,8 @@ body {
   padding-left: 20px;
   padding-top: 50px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .prix {
     font-size: 0.7em;
     padding: 0px;
@@ -412,7 +445,8 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .description_produit {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -427,7 +461,8 @@ body {
 .produit_last_box {
   width: 300px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .produit_last_box {
     font-size: 0.8em;
     width: 30%;
@@ -440,7 +475,8 @@ body {
   display: flex;
   border: 2px whitesmoke solid;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .box_produit {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -457,7 +493,8 @@ body {
   position: relative;
   bottom: 10px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .product__name {
     font-size: 2em;
     position: relative;
@@ -482,7 +519,8 @@ body {
   width: 40%;
   font-size: 1.2em;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .prix_and_button {
     font-size: 0.9em;
   }
@@ -491,7 +529,8 @@ body {
 #priceProduct {
   font-size: 1.2em;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   #priceProduct {
     font-size: 0.9em;
   }
@@ -501,7 +540,8 @@ body {
   font-size: 1.2em;
   width: 100%;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .prix_product {
     font-size: 0.9em;
     position: relative;
@@ -509,7 +549,8 @@ body {
     padding-left: 10px;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   .prix_product {
     font-size: 1em;
     position: relative;
@@ -529,12 +570,14 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .product__lentilles {
     font-size: 0.7em;
   }
 }
-@media only screen and (min-width:760px) and (max-width: 1200px) {
+
+@media only screen and (min-width: 760px) and (max-width: 1200px) {
   .product__lentilles {
     font-size: 1em;
     position: relative;
@@ -547,12 +590,13 @@ select {
   height: 40px;
   position: center;
   background-color: #6e5e14;
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   font-size: 1.5rem;
   font-weight: bold;
   margin-left: 30px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   select {
     font-size: 0.8em;
     width: 100px;
@@ -579,7 +623,8 @@ select {
   padding-left: 20%;
   width: 40%;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .personalisation {
     font-size: 0.8em;
     width: 40%;
@@ -597,7 +642,8 @@ select {
   height: 300px;
   font-size: 2em;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .titre_description_et_contenu_description {
     height: 100px;
     font-size: 0.9em;
@@ -615,7 +661,8 @@ select {
   padding-left: 10px;
   padding-right: 10px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .product__details {
     font-size: 1em;
   }
@@ -638,7 +685,8 @@ select {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-@media only screen and (max-width:760px) {
+
+@media only screen and (max-width: 760px) {
   .btn_product {
     width: 100px;
     height: 45px;
@@ -653,16 +701,45 @@ select {
   }
 }
 
-.remerciements_achats {
-  color: #6e5e14;
-  font-size: 2em;
-  padding-left: 10%;
+.confirmation {
+  color: whitesmoke;
+  text-align: center;
 }
 
-input {
-  height: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+#orderId {
+  color: blue;
+}
+
+#tableau_facture {
+  vertical-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10%;
+  width: 80%;
+}
+
+td {
+  border: 2px solid whitesmoke;
+}
+
+tr {
+  border: 2px solid whitesmoke;
+}
+
+th {
+  border: 2px solid whitesmoke;
+}
+
+#article_acheté {
+  border: 2px solid whitesmoke;
+}
+
+.photo_article_acheté {
+  height: 267px;
+  width: 400px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 footer {
@@ -674,7 +751,7 @@ footer {
   text-align: center;
 }
 
-.basket.flex-block {
+#panier_utilisateur {
   color: #6e5e14;
 }
 
@@ -718,11 +795,11 @@ td {
 
 tr {
   border: 2px solid whitesmoke;
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
 }
 
 .image_produit_panier {
-  height: 130px;
+  height: 170px;
   width: 230px;
 }
 
@@ -733,7 +810,7 @@ tr {
   left: 20px;
 }
 
-#sommeTotal {
+#montant_total {
   color: whitesmoke;
 }
 

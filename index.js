@@ -57,10 +57,10 @@ getAllCameras = () =>{
     boxPrix.setAttribute("class", "prix");
     boxDescription.setAttribute("class", "appareil_box--bloc_description");
     produitDescription.setAttribute("class", "description_produit");
-    boxImage.setAttribute("src", appareilPhoto.imageUrl);
+    boxImage.setAttribute("src", appareilPhoto.imageUrl); // Récupère l'Url de l'image
     boxImage.setAttribute("alt", "image de l'appareil photo"); 
     produitButton.setAttribute("class", "btn_index"),
-    boxLien.setAttribute("href", "product.html?id=" + appareilPhoto._id);
+    boxLien.setAttribute("href", "product.html?id=" + appareilPhoto._id); // Envoi vers produit.html du produit séléctionné
     boxLien.setAttribute("class","lien_btn");
     
     listOfCam.appendChild(appareilBox);
@@ -265,7 +265,7 @@ ajouter = () => {
 
 // Vérification des données saisies par l'utilisateur dans le formulaire 
 
- checkInput = () =>{
+verifSaisies = () =>{
   //Controle Regex
     let verifNombre = /[0-9]/;
     let verifEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
@@ -274,7 +274,7 @@ ajouter = () => {
 //message fin de controle
     let verifMessage = "";
 
-//Récupération des données
+// Récupération des données
 
     let nom = document.getElementById("nom").value;
     let prenom = document.getElementById("prenom").value;
@@ -285,39 +285,41 @@ ajouter = () => {
 // Test Formulaire
         
   if(verifNombre.test(nom) == true || verifSymbole.test(nom) == true || nom == ""){
-    verifMessage = "Vérifier/renseigner votre nom";
+    verifMessage = verifMessage + "\n" + "Veuillez entrer un nom valide"
   }else{
-    console.log("Nom validé");
+    console.log("nom validé");
+    
   };
 // Nom => aucun chiffre ou charactère spécial permis
   if(verifNombre.test(prenom) == true || verifSymbole.test(prenom) == true || prenom == ""){
-  	verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre prénom";
+  	verifMessage = verifMessage + "\n" + "Veuillez entrer un prénom valide"
   }else{
     console.log("Prénom validé");
         };
 //  Email 
   if(verifEmail.test(email) == false){
-    verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre email";
+    verifMessage = verifMessage + "\n" + "Veuillez entrer une adresse email valide"
   }else{
     console.log("Adresse mail validée");
   };
 // Adresse
-  if(verifSymbole.test(adresse) == true || adresse == ""){
-    verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre adresse";
+  if(verifNombre.test(adresse) == true || verifSymbole.test(adresse)|| adresse == ""){
+    verifMessage = verifMessage + "\n" + "Veuillez entrer une adresse valide"
   }else{
     console.log("Adresse validée");
   };
 // Ville 
-  if(verifSymbole.test(ville) == true && verifNombre.test(ville) == true || ville == ""){
-    verifMessage = verifMessage + "\n" + "Vérifier/renseigner votre ville"
+  if(verifNombre.test(ville) == true || verifSymbole.test(ville) == true || ville == ""){
+    verifMessage = verifMessage + "\n" + "Veuillez entrer une ville existante"
   }else{
     console.log("Localisation validée")
   };
-        //Si un des champs n'est pas bon => message d'alert avec la raison
-  if(verifMessage != ""){
-        	alert("Il est nécessaire de :" + "\n" + verifMessage);
-        }
-  else{
+      //Si un des champs n'est pas bon => message d'alert avec la raison
+   if(verifMessage != ""){
+  	alert("Il est nécessaire de :" + "\n" + verifMessage);
+  }
+
+  else {
     contact = {
     firstName : nom,
     lastName : prenom,
@@ -332,12 +334,12 @@ ajouter = () => {
    
 //Vérification du panier
 
-checkPanier = () =>{
+verifPanier = () =>{
   
 // Le panier ne doit pas être vide
 
-    let etatPanier = JSON.parse(localStorage.getItem("panier utilisateur"));
-  if(etatPanier.length <1 || etatPanier == null) {
+    let statusPanier = JSON.parse(localStorage.getItem("panier utilisateur"));
+  if(statusPanier.length <1 || statusPanier == null) {
     console.log("Erreur: le localStorage ne contient pas de panier")
     alert("Votre panier est vide");
   return false;
@@ -363,7 +365,7 @@ checkPanier = () =>{
   	request.onload = function() {
   if(this.readyState == XMLHttpRequest.DONE && this.status == 201) {
 
-//Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans confirm.html
+//Sauvegarde du retour de l'API dans la session Storage pour affichage dans confirm.html
 
     sessionStorage.setItem("order", this.responseText);
 
@@ -383,15 +385,17 @@ checkPanier = () =>{
   });
 };
 
-// Envoi du Formulaire
+// Envoi du Formulaire 
+
   envoiFormulaireApi = () =>{
 
     let envoyer = document.getElementById("form_user");
     envoyer.addEventListener("submit", (event) => {
     event.preventDefault()
-//Lancement des verifications du panier et du form => si Ok envoi
 
-  if(checkPanier() == true && checkInput() != null){
+// Envoi du formulaire après vérification
+
+  if(verifPanier() == true && verifSaisies() != null){
     console.log("Vérification réussie");
     panierUtilisateur.forEach((article) => {
     products.push(article._id);
@@ -410,7 +414,7 @@ checkPanier = () =>{
   envoiFormulaire(sendForm,formUrl);
       console.log(commande);
      
-//Une fois la commande faite retour à l'état initial des tableaux/objet/localStorage
+// Une fois la commande passée, on vide le Local Storage
 
     contact = {};
     products = [];

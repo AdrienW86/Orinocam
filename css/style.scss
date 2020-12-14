@@ -66,7 +66,6 @@ h2 {
 h3 {
     font-family: 'Dancing Script', cursive;
     color: $white;
-    font-size: 2em;
     padding-left: 30px;
 
     @media #{$phone} {        
@@ -577,77 +576,17 @@ select {
     }
 }
 
-// Page de confirmation
-
-.confirmation {
-    color: $white;
-    text-align: center;
-}
-
-#firstName {
-    color: $gold;
-}
-
-#orderId  {
-    color: red;   
-}
-
-#tableau_facture {
-    vertical-align: center;
-    justify-content: center;
-    margin: 10%;
-    width: 80%;
-}
-
-td{
-    border: 2px solid $white;
-}
-
-tr{
-    border: 2px solid $white;
-}
-
-th{
-    border: 2px solid $white;
-}
-
-#article_acheté {
-    border: 2px solid $white;
-}
-
-.photo_article_acheté {
-    height: 267px;
-    width: 400px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-   
-    @media #{$phone} {
-        height: 85px;
-        width: 115px;;
-    }   
-}
-
- .retour_accueil {
-    color: #465bef;
-    margin-left: 20px;
-}
-
-// Footer
-
-footer {
-    background-color:rgb(37, 37, 37);
-    height: 100px;
-    width: 100%;
-    color: $white;
-    font-size: 2em;
-    text-align: center;
-}
-
 // Panier
 
 .menu {
     justify-content: center;
     align-items: center;
+}
+
+#pas_de_panier {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 #panier_utilisateur {
@@ -671,7 +610,10 @@ footer {
         margin-right: 15%; 
 
         @media #{$phone} {
+            width: 95%;
             font-size: 0.7em;
+            margin-left: 2%;
+            margin-right: 0px;
         }   
 
         @media #{$medium} {  
@@ -746,11 +688,12 @@ tr {
     }   
 
     @media #{$phone} {
-        font-size: 0.9em;
+        font-size: 0.8em;
         position: relative;
         top: 5px;
-        left: 2%;
-        width: 50px;
+        left: 1%;
+        width: 45px;
+        padding-left: 5px;
           
         &:active {
             position: relative;
@@ -802,6 +745,7 @@ tr {
     table {
         position: relative;
         right: 10px;
+        
     }
 }
 
@@ -861,5 +805,81 @@ legend {
         margin-left: 30%;
         margin-right: 30%;
     }    
+}
+
+// Page de confirmation
+
+.confirmation {
+    color: $white;
+    text-align: center;
+}
+
+#firstName {
+    color: $gold;
+}
+
+#orderId  {
+    color: red;   
+}
+
+#tableau_facture {
+    vertical-align: center;
+    justify-content: center;
+    margin: 10%;
+    width: 80%;
+}
+
+td{
+    border: 2px solid $white;
+}
+
+tr{
+    border: 2px solid $white;
+}
+
+th{
+    border: 2px solid $white;
+}
+
+#article_acheté {
+    border: 2px solid $white;
+}
+
+.photo_article_acheté {
+    height: 267px;
+    width: 400px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+   
+    @media #{$phone} {
+        height: 85px;
+        width: 115px;;
+    }   
+}
+
+ .retour_accueil {
+    color: #465bef;
+    margin-left: 20px;
+}
+
+// Footer
+
+footer {
+    background-color:rgb(37, 37, 37);
+    height: 200px;
+    width: 100%;
+    color: $white;
+    font-size: 2em;
+    text-align: center;
+    vertical-align: center;
+
+    
+    @media #{$phone} {
+        height: 70px;
+        width: 100%;
+        font-size: 1em;
+        color: $white;
+        text-align: center;
+        }   
 }
 

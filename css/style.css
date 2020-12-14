@@ -68,7 +68,6 @@ h2 {
 h3 {
   font-family: 'Dancing Script', cursive;
   color: whitesmoke;
-  font-size: 2em;
   padding-left: 30px;
 }
 
@@ -697,72 +696,6 @@ select {
   }
 }
 
-.confirmation {
-  color: whitesmoke;
-  text-align: center;
-}
-
-#firstName {
-  color: #6e5e14;
-}
-
-#orderId {
-  color: red;
-}
-
-#tableau_facture {
-  vertical-align: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 10%;
-  width: 80%;
-}
-
-td {
-  border: 2px solid whitesmoke;
-}
-
-tr {
-  border: 2px solid whitesmoke;
-}
-
-th {
-  border: 2px solid whitesmoke;
-}
-
-#article_acheté {
-  border: 2px solid whitesmoke;
-}
-
-.photo_article_acheté {
-  height: 267px;
-  width: 400px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-@media only screen and (max-width: 760px) {
-  .photo_article_acheté {
-    height: 85px;
-    width: 115px;
-  }
-}
-
-.retour_accueil {
-  color: #465bef;
-  margin-left: 20px;
-}
-
-footer {
-  background-color: #252525;
-  height: 100px;
-  width: 100%;
-  color: whitesmoke;
-  font-size: 2em;
-  text-align: center;
-}
-
 .menu {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -770,6 +703,12 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+#pas_de_panier {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 #panier_utilisateur {
@@ -802,7 +741,10 @@ footer {
 
 @media only screen and (max-width: 760px) {
   .box_tableau table {
+    width: 95%;
     font-size: 0.7em;
+    margin-left: 2%;
+    margin-right: 0px;
   }
 }
 
@@ -888,11 +830,12 @@ tr {
 
 @media only screen and (max-width: 760px) {
   .button_supprimer {
-    font-size: 0.9em;
+    font-size: 0.8em;
     position: relative;
     top: 5px;
-    left: 2%;
-    width: 50px;
+    left: 1%;
+    width: 45px;
+    padding-left: 5px;
   }
   .button_supprimer:active {
     position: relative;
@@ -999,10 +942,87 @@ legend {
 
 @media only screen and (max-width: 760px) {
   .btn_envoi_formulaire {
- s.map */size: 1em;
+    font-size: 1em;
     width: 40%;
     margin-left: 30%;
     margin-right: 30%;
+  }
+}
+
+.confirmation {
+  color: whitesmoke;
+  text-align: center;
+}
+
+#firstName {
+  color: #6e5e14;
+}
+
+#orderId {
+  color: red;
+}
+
+#tableau_facture {
+  vertical-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10%;
+  width: 80%;
+}
+
+td {
+  border: 2px solid whitesmoke;
+}
+
+tr {
+  border: 2px solid whitesmoke;
+}
+
+th {
+  border: 2px solid whitesmoke;
+}
+
+#article_acheté {
+  border: 2px solid whitesmoke;
+}
+
+.photo_article_acheté {
+  height: 267px;
+  width: 400px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 760px) {
+  .photo_article_acheté {
+    height: 85px;
+    width: 115px;
+  }
+}
+
+.retour_accueil {
+  color: #465bef;
+  margin-left: 20px;
+}
+
+footer {
+  background-color: #252525;
+  height: 200px;
+  width: 100%;
+  color: whitesmoke;
+  font-size: 2em;
+  text-align: center;
+  vertical-align: center;
+}
+
+@media only screen and (max-width: 760px) {
+  footer {
+    height: 70px;
+    width: 100%;
+    font-size: 1em;
+    color: whitesmoke;
+    text-align: center;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -538,10 +538,7 @@ tableauFacture = () => {
 
 // On redirige l'utilisateur sur la page d'accueil
 
-function redir(){
-  self.location.href="./index.html"
-}
-  setTimeout(redir,20000)
+
 
 /*
 let decompte = function (i) {

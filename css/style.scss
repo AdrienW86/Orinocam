@@ -857,9 +857,21 @@ th{
     }   
 }
 
- .retour_accueil {
-    color: #465bef;
-    margin-left: 20px;
+.retour_accueil {
+    color: $gold;
+    text-decoration: underline;
+    margin-left: 100px;
+    font-size: 1.5em;
+}
+
+.compteur {
+    margin-left: 100px;
+    font-size: 1.5em;
+    color: $white;
+
+    #chrono {
+    color: red;
+    }
 }
 
 // Footer

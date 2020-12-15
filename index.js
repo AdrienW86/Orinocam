@@ -364,14 +364,14 @@ verifPanier = () =>{
   	let request = new XMLHttpRequest();
   	request.onload = function() {
   if(this.readyState == XMLHttpRequest.DONE && this.status == 201) {
-
+    console.log("requête post effectuée")
 //Sauvegarde du retour de l'API dans la session Storage pour affichage dans confirm.html
 
     sessionStorage.setItem("order", this.responseText);
 
 //Chargement de la page de confirmation
     window.location = "./confirm.html";
-        
+    console.log("l'utilisateur a été redirigé")
     resolve(JSON.parse(this.responseText));
     console.log(sendForm);
   }else{ 
@@ -437,13 +437,16 @@ confirmation = () =>{
     
     console.log(order);
     sessionStorage.removeItem("order");
+    console.log("Message de remerciements affiché")
+
   }else{
  
   alert("Merci pour votre commande");
   window.location("./index.html");
-  }
-};
-
+  
+  };
+}
+ 
 //------Tableau de recap de la commande dans la page de confirmation------//
 
 tableauFacture = () => {
@@ -532,3 +535,34 @@ tableauFacture = () => {
     document.getElementById("total").textContent =
     totalFacture + " €";
 };
+
+// On redirige l'utilisateur sur la page d'accueil
+
+function redir(){
+  self.location.href="./index.html"
+}
+  setTimeout(redir,20000)
+
+/*
+let decompte = function (i) {
+  document.getElementById("chrono").innerHTML = i + " s"; 
+};
+
+ let temp = 0
+ let decrement = function() {
+   for(let i = 20; i > -1; i--) {
+     setTimeout((function(s){
+       return function() {
+         decompte(s)
+       }
+       })(i), temp);
+
+       temp += 1000
+   }
+ }
+
+ decrement();
+
+ setTimeout( temp, -1000);
+
+*/

@@ -125,6 +125,7 @@ async function appareilDescriptif(){
 // Création du panier au premier chargement si inexistant
 
   if(localStorage.getItem("panier utilisateur")){
+    console.log("le panier de l'utilisateur a été crée");
 	  console.log(panierUtilisateur);
   }else{
 	  console.log("Création du panier");
@@ -283,14 +284,15 @@ verifSaisies = () =>{
     let ville = document.getElementById("ville").value;
 
 // Test Formulaire
-        
+      
+// Pas de chiffres dans le prénon ou de symboles
   if(verifNombre.test(nom) == true || verifSymbole.test(nom) == true || nom == ""){
     verifMessage = verifMessage + "\n" + "Veuillez entrer un nom valide"
   }else{
     console.log("nom validé");
     
   };
-// Nom => aucun chiffre ou charactère spécial permis
+// Pas de chiffres dans le nom ou de symboles
   if(verifNombre.test(prenom) == true || verifSymbole.test(prenom) == true || prenom == ""){
   	verifMessage = verifMessage + "\n" + "Veuillez entrer un prénom valide"
   }else{
@@ -302,21 +304,21 @@ verifSaisies = () =>{
   }else{
     console.log("Adresse mail validée");
   };
-// Adresse
-  if(verifNombre.test(adresse) == true || verifSymbole.test(adresse)|| adresse == ""){
+// Pas de symboles dans l'adresse
+  if(verifSymbole.test(adresse) == true || adresse == ""){
     verifMessage = verifMessage + "\n" + "Veuillez entrer une adresse valide"
   }else{
     console.log("Adresse validée");
   };
-// Ville 
+// Pas de symboles dans l'adresse ou de chiffres
   if(verifNombre.test(ville) == true || verifSymbole.test(ville) == true || ville == ""){
     verifMessage = verifMessage + "\n" + "Veuillez entrer une ville existante"
   }else{
     console.log("Localisation validée")
   };
-      //Si un des champs n'est pas bon => message d'alert avec la raison
+// Si le formulaire n'est pas correctement rempli, l'utilisateur reçoit une alerte
    if(verifMessage != ""){
-  	alert("Il est nécessaire de :" + "\n" + verifMessage);
+  	alert(" Veuillez remplir les champs suivants:" + "\n" + verifMessage);
   }
 
   else {
@@ -536,30 +538,4 @@ tableauFacture = () => {
     totalFacture + " €";
 };
 
-// On redirige l'utilisateur sur la page d'accueil
 
-
-
-/*
-let decompte = function (i) {
-  document.getElementById("chrono").innerHTML = i + " s"; 
-};
-
- let temp = 0
- let decrement = function() {
-   for(let i = 20; i > -1; i--) {
-     setTimeout((function(s){
-       return function() {
-         decompte(s)
-       }
-       })(i), temp);
-
-       temp += 1000
-   }
- }
-
- decrement();
-
- setTimeout( temp, -1000);
-
-*/

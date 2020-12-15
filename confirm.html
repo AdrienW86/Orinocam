@@ -93,7 +93,25 @@
       function redir(){
   self.location.href="./index.html"
 }
-  setTimeout(redir,20000)
+  setTimeout(redir,60000)
+  let decompte = function (i) {
+  document.getElementById("chrono").innerHTML = i + " s"; 
+  console.log("L'utilisateur va être redirigé vers l'accueil dans 60s");
+};
+
+ let temp = 0
+ let decrement = function() {
+   for(let i = 59; i > -1; i--) {
+     setTimeout((function(s){
+       return function() {
+         decompte(s)
+       }
+       })(i), temp);
+       temp += 1000
+   }
+ }
+ decrement();
+ setTimeout( temp, -1000);
     </script>
        
 </body>

@@ -1,0 +1,20 @@
+// Footer
+
+footer {
+    background-color:rgb(37, 37, 37);
+    height: 200px;
+    width: 100%;
+    color: $white;
+    font-size: 2em;
+    text-align: center;
+    vertical-align: center;
+
+    
+    @media #{$phone} {
+        height: 70px;
+        width: 100%;
+        font-size: 1em;
+        color: $white;
+        text-align: center;
+        }   
+}

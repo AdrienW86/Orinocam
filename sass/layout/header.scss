@@ -1,0 +1,107 @@
+// Header
+
+.banniere {
+    background-image: url("/images/vintage.jpg");  
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    z-index: +10;
+    margin: 0px;
+
+    @media #{$phone} {
+        height: 80px;
+    }
+
+    @media #{$medium} {
+        height: 230px;
+    }
+   
+    @media #{$large} {
+    height: 290px;
+    }
+}
+ 
+.panier {
+    font-size:1em;
+    color: $white
+}  
+
+.lien_panier {
+    color:$gold;  
+}
+
+.lien_nav {
+    text-decoration: none; 
+    font-family: 'Dancing Script', cursive;
+    font-size: 1em;    
+    color: $white;
+}
+
+.icone_contact {
+    font-size: 1em;
+    color: $white;
+}
+
+ul {   
+    display: flex;
+    list-style: none;
+    align-content: space-around;
+
+    @media #{$phone} {
+        font-size: 1em;
+        margin: auto;
+        width: 95%;
+    }
+    @media #{$medium} {
+        font-size: 3em;
+    }
+   
+    @media #{$large} {
+        font-size: 3em;
+    }
+}
+
+a {
+    color: $white;
+    text-decoration: none;
+}
+
+li {   
+    display:flex;
+    width: 25%;
+    margin-left : 10%;
+    color: $gold;
+    text-decoration: none;   
+
+    @media #{$phone} {
+       width: 33%;
+       margin: 0px;
+       justify-content: center;
+       padding-right: 18%;
+    }
+}
+      
+.accueil:hover {
+    border-bottom: 2px solid $gold;
+}
+
+.icone_contact:hover, .panier:hover {
+    color: $gold;
+}
+
+#indexPanier {
+    color: $gold;   
+    font-family: 'Courier New', Courier, monospace;
+
+    @media #{$phone} {
+        font-size: 1em;
+    }
+
+    @media #{$medium} {
+        font-size: 1.2em;
+    }
+   
+    @media #{$large} {
+        font-size: 1.2em;
+    }
+}

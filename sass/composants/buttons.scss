@@ -1,0 +1,38 @@
+// Composants
+
+button {
+    background-color: $gold;
+    border-radius: 8px; 
+    border: 2px $white solid;
+    margin-right: 40px;
+    vertical-align: center;
+    height: 40px;
+    width: 120px;
+    color: $white;
+
+
+    &:hover {
+        color: black;
+    }
+
+    &:active {
+        position: relative;
+        top: 2px;
+        right: 2px;
+    }
+
+    @media #{$phone} {
+        
+        width: 60px;   
+        margin: 0px;
+        font-size: 0.7em;
+        margin-left: 5px;
+        margin-right: 5px; 
+        margin-top: 25px;
+        margin-bottom: 10px;     
+    }
+}
+
+.lien_btn:hover {
+    color: black;
+}

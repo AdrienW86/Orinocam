@@ -62,7 +62,6 @@ img {
     width: 100%; 
 
     @media #{$phone} {
-        flex-flow: flex wrap; 
         width: 100%;              
     }
 }   
@@ -221,7 +220,6 @@ img {
 select {
     width: 250px;
     height: 40px;
-    position: center;
     background-color: $gold;
     font-family: 'Dancing Script', cursive;
     font-size: 1.5rem;

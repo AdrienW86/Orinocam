@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="descprition" content="Orinocam">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="sass/style.css">
 		<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
 		<link rel="shortcut icon" type="image/x-icon" href="images/logo.png">
 		<title> Votre sélection </title>
@@ -64,7 +64,7 @@
 					</div>
 					<div class="personalisation">
 						<div class="choisir_option">
-							<label for="optionSelect" class="appareil_lentilles">Choisissez vos lentilles :
+							<label id="optionSelect" class="appareil_lentilles">Choisissez vos lentilles :
 							</label>
 						</div>				
 						<div class="tableau_lentilles"><select name="option" id="option_appareil">
@@ -92,7 +92,9 @@
 		<footer> <h5> Orinocam - by Orinoco </h5></footer>
 	</div>
 	
-    <script src="index.js"></script>
+	<script src="/JavaScript/index.js"></script>
+	<script src="/JavaScript/product.js"></script>
+
     <script>
 		
 		appareilDescriptif();

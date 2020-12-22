@@ -70,7 +70,7 @@
     };
   };
      
-  //Vérification du panier
+  // Vérification du panier
   
   verifPanier = () =>{
     
